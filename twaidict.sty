@@ -1,0 +1,111 @@
+% twaidict.sty -- layout and markup for the TwAI dictionary.
+%
+% Markup summary (see README.md for a full example):
+%
+%   \begin{entry}{<key>}{<Term>}[<abbreviation>]
+%     \defn[<pages>]{<bibkey>}{<definition adapted from the source>}
+%     \defn*[<pages>]{<bibkey>}{<definition quoted verbatim>}
+%     \note{<commentary comparing the definitions>}
+%     \related{<key>,<key>,...}
+%   \end{entry}
+%
+% \xref{<key>} prints a hyperlink to another entry by its term name.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{twaidict}[2026/09/23 TwAI dictionary markup]
+
+\RequirePackage{xcolor}
+\RequirePackage{enumitem}
+\RequirePackage{etoolbox}
+\RequirePackage{csquotes}
+\RequirePackage{fancyhdr}
+\RequirePackage{needspace}
+
+\definecolor{twai@term}{HTML}{1F4E79}
+\definecolor{twai@rule}{HTML}{A6B8CC}
+\definecolor{twai@meta}{HTML}{5A6570}
+
+% --- Running heads: first and last term on the page, as in a print dictionary.
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[L]{\small\itshape\rightmark}
+\fancyhead[R]{\small\itshape\leftmark}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\sectionmark}[1]{}
+\renewcommand{\subsectionmark}[1]{}
+
+% --- Domain headings.
+% \domain{<title>} starts a new part of the dictionary (AI, ML, Trustworthy AI).
+\newcommand{\domain}[1]{%
+  \clearpage
+  \section{#1}%
+  \markboth{#1}{#1}%
+}
+
+% --- Entries.
+\newcommand{\twai@seealso}{}
+\newcommand{\twai@note}{}
+\newif\iftwai@firstsee
+
+\NewDocumentEnvironment{entry}{m m o}{%
+  \par\needspace{6\baselineskip}\medskip
+  \noindent
+  \def\@currentlabelname{#2}%
+  \phantomsection\label{term:#1}%
+  \markboth{#2}{#2}%
+  \index{#2}%
+  \IfValueT{#3}{\index{#3|see{#2}}}%
+  {\large\bfseries\color{twai@term}#2}%
+  \IfValueT{#3}{\enspace{\color{twai@meta}(#3)}}%
+  \par\nobreak\vspace{2pt}%
+  {\color{twai@rule}\hrule height 0.4pt}%
+  \nobreak\vspace{2pt}%
+  % \note and \related are used inside the enumerate group, so they store
+  % their text globally for the end of the entry to print.
+  \gdef\twai@seealso{}%
+  \gdef\twai@note{}%
+  \begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=1.8em,
+                    itemsep=3pt, topsep=3pt]
+}{%
+  \end{enumerate}%
+  \ifdefempty{\twai@note}{}{%
+    \par\noindent\hangindent=1.8em\hangafter=0
+    {\small\textit{Note.} \twai@note}\par}%
+  \ifdefempty{\twai@seealso}{}{%
+    \par\noindent\hangindent=1.8em\hangafter=0
+    {\small\color{twai@meta}\textit{See also:} \twai@seealso}\par}%
+  \medskip
+}
+
+% \defn[<pages>]{<bibkey>}{<text>} -- a definition adapted from a source.
+% \defn*[<pages>]{<bibkey>}{<text>} -- a verbatim quotation from a source.
+\NewDocumentCommand{\defn}{s o m m}{%
+  \item
+  \IfBooleanTF{#1}{\enquote{#4}}{#4}%
+  % Right-align the source on the last line, or on its own line if needed.
+  \unskip\nobreak\hfil\penalty50\hskip1em\null\nobreak\hfil
+  {\small\color{twai@meta}%
+   \mbox{\IfBooleanTF{#1}{}{adapted from\ }%
+   \IfValueTF{#2}{\cite[#2]{#3}}{\cite{#3}}}}%
+  {\parfillskip=0pt\finalhyphendemerits=0\par}%
+}
+
+\newcommand{\note}[1]{\gdef\twai@note{#1}}
+
+\newcommand{\xref}[1]{\hyperref[term:#1]{\nameref*{term:#1}}}
+
+\newcommand{\related}[1]{%
+  \gdef\twai@seealso{}%
+  \twai@firstseetrue
+  \forcsvlist{\twai@addsee}{#1}%
+}
+\newcommand{\twai@addsee}[1]{%
+  \iftwai@firstsee
+    \twai@firstseefalse
+    \gappto{\twai@seealso}{\xref{#1}}%
+  \else
+    \gappto{\twai@seealso}{; \xref{#1}}%
+  \fi
+}
+
+\endinput

@@ -1,0 +1,72 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=2.5cm,headheight=14pt]{geometry}
+\usepackage[english]{babel}
+\usepackage[style=authoryear,maxcitenames=2,backend=biber]{biblatex}
+\usepackage{imakeidx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{twaidict}
+
+\addbibresource{references.bib}
+\makeindex[intoc,columns=2,title=Index of Terms]
+\indexsetup{othercode=\small}
+
+\hypersetup{
+  pdftitle   = {TwAI Dictionary of AI, ML, and Trustworthy AI Terms},
+  pdfsubject = {Terminology with multiple sourced definitions},
+}
+
+\title{TwAI Dictionary\\[4pt]
+  \large Artificial Intelligence, Machine Learning, and Trustworthy AI Terms}
+\author{TwAI Guidelines}
+\date{\today}
+
+\begin{document}
+
+\pagestyle{empty}
+\maketitle
+\thispagestyle{empty}
+
+\section*{How to Read This Dictionary}
+
+Terms in artificial intelligence are defined differently by standards bodies,
+regulators, and researchers. The differences matter: a system can be an
+\enquote{AI system} under one definition and not another, and
+\enquote{fairness} names several mathematically incompatible criteria. This
+dictionary therefore gives \emph{several} definitions for each term, each tied
+to its source, rather than a single preferred one.
+
+\begin{itemize}[itemsep=2pt]
+  \item Definitions in \enquote{quotation marks} are quoted from the source.
+  \item Definitions marked \emph{adapted from} are paraphrased or condensed.
+        Consult the source before citing them as formal text.
+  \item A \emph{Note} after the definitions explains how they differ, and
+        \emph{See also} links to related entries.
+  \item Terms are grouped into three domains: general artificial intelligence,
+        machine learning, and trustworthy AI. Within each domain they are
+        ordered alphabetically. An index of all terms and abbreviations is at
+        the end.
+\end{itemize}
+
+\tableofcontents
+
+\clearpage
+\pagestyle{fancy}
+
+\input{entries/ai}
+\input{entries/ml}
+\input{entries/trustworthy}
+
+\clearpage
+\markboth{Sources}{Sources}
+\printbibliography[heading=bibintoc,title=Sources]
+
+\clearpage
+\markboth{Index}{Index}
+\printindex
+
+\end{document}
