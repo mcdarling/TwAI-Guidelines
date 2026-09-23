@@ -15,3 +15,9 @@
 *.synctex.gz
 twai-dictionary.pdf
 *-SAVE-ERROR
+
+# Generated from dictionary/*.yaml by tools/build.py
+entries/
+docs/generated/
+docs/_build/
+docs/_extra/

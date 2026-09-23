@@ -1,9 +1,14 @@
-name: Build dictionary
+name: Build and publish
 
 on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -11,13 +16,46 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Compile LaTeX
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate entries from the YAML data
+        run: python3 tools/build.py all
+
+      - name: Compile PDF
         uses: xu-cheng/latex-action@v3
         with:
           root_file: twai-dictionary.tex
+
+      - name: Build site
+        run: make site
 
       - name: Upload PDF
         uses: actions/upload-artifact@v4
         with:
           name: twai-dictionary
           path: twai-dictionary.pdf
+
+      - name: Upload site for GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/_build/html
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

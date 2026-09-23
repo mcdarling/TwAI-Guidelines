@@ -1,0 +1,637 @@
+# Trustworthy AI terms, in alphabetical order.
+domain: Trustworthy AI
+terms:
+- key: accountability
+  term: Accountability
+  definitions:
+  - source: hleg-2019
+    text: >-
+      A requirement for trustworthy AI: mechanisms are in place to ensure responsibility
+      and accountability for AI systems and their outcomes, before and after development,
+      deployment, and use. These include auditability, minimising and reporting
+      negative impacts, trade-offs, and redress.
+  - source: nist-ai-rmf
+    at: §3.4
+    text: >-
+      Accountability presupposes transparency. It concerns who answers for an
+      AI system's outcomes, and it depends on organisational practices and governing
+      structures for reducing harms, such as risk management and clear roles and
+      responsibilities.
+  - source: bovens-2007
+    text: >-
+      In public governance, a relationship between an actor and a forum in which
+      the actor must explain and justify its conduct, the forum can pose questions
+      and pass judgement, and the actor may face consequences.
+  note: >-
+    Bovens's relational definition clarifies that accountability needs an identifiable
+    party who must answer, and someone they must answer to. Transparency alone
+    does not provide either.
+  related:
+  - transparency
+  - auditability
+  - ai-governance
+- key: adversarial-example
+  term: Adversarial Example
+  definitions:
+  - source: szegedy-2014
+    text: >-
+      An input formed by applying a small, often imperceptible, perturbation to
+      a correctly classified example, chosen so that a neural network misclassifies
+      it.
+  - source: goodfellow-2015
+    text: >-
+      Inputs formed by intentionally adding worst-case perturbations. The authors
+      argue that vulnerability to them comes mainly from the models' largely linear
+      behaviour in high-dimensional spaces, not from non-linearity or overfitting.
+  - source: nist-ai-100-2
+    text: >-
+      The product of an *evasion attack*: at deployment time, an adversary modifies
+      a test sample to change the model's prediction to one the attacker chooses.
+  related:
+  - robustness
+  - data-poisoning
+  - security-resilience
+- key: ai-governance
+  term: AI Governance
+  definitions:
+  - source: mantymaki-2022
+    text: >-
+      A system of rules, practices, processes, and technological tools used to
+      ensure that an organisation's use of AI technologies is aligned with its
+      strategies, objectives, and values, fulfils legal requirements, and meets
+      principles of ethical AI.
+  - source: iso-42001
+    text: >-
+      Realised through an *AI management system*: the interrelated policies, objectives,
+      and processes an organisation establishes for the responsible development,
+      provision, or use of AI systems.
+  - source: nist-ai-rmf
+    at: §5.1
+    text: >-
+      The GOVERN function: a culture of risk management is cultivated and present
+      across the organisation. It cuts across and informs the MAP, MEASURE, and
+      MANAGE functions.
+  related:
+  - accountability
+  - ai-risk
+  - auditability
+- key: ai-risk
+  term: AI Risk
+  definitions:
+  - source: eu-ai-act
+    at: Art. 3(2)
+    quote: true
+    text: >-
+      The combination of the probability of an occurrence of harm and the severity
+      of that harm.
+  - source: nist-ai-rmf
+    at: §1.1
+    text: >-
+      A composite measure of an event's probability of occurring and the magnitude
+      or degree of the consequences. AI risks can affect individuals, groups,
+      organisations, communities, society, the environment, and the planet.
+  - source: iso-31000
+    text: >-
+      The effect of uncertainty on objectives, where an effect is a deviation
+      from the expected and can be positive, negative, or both.
+  note: >-
+    ISO 31000 counts positive deviations (opportunities) as risk. The EU AI Act
+    and NIST AI RMF concentrate on harm. The EU AI Act classifies systems into
+    risk tiers (prohibited, high-risk, limited, and minimal), and each tier carries
+    different obligations.
+  related:
+  - ai-governance
+  - safety
+  - red-teaming
+- key: alignment
+  term: Alignment
+  alias: AI alignment
+  definitions:
+  - source: ji-2023-alignment
+    text: >-
+      The goal of making AI systems behave in line with human intentions and values.
+      It is characterised by the RICE objectives: robustness, interpretability,
+      controllability, and ethicality.
+  - source: gabriel-2020
+    text: >-
+      The normative and technical problem of making AI act in accordance with
+      appropriate values. The problem includes choosing whether a system should
+      follow instructions, intentions, revealed preferences, ideal preferences,
+      interests, or values.
+  - source: russell-2019
+    text: >-
+      Ensuring that machines pursue objectives that are beneficial to humans.
+      The proposed route is for machines to be uncertain about human preferences
+      and to learn them from behaviour, rather than to optimise a fixed, possibly
+      misspecified objective.
+  related:
+  - rlhf
+  - safety
+  - human-oversight
+- key: auditability
+  term: Auditability
+  alias: algorithmic audit
+  definitions:
+  - source: hleg-2019
+    text: >-
+      The ability to assess an AI system's algorithms, data, and design processes,
+      by internal or external auditors, with the resulting reports available.
+      It is especially important for systems affecting fundamental rights.
+  - source: raji-2020
+    text: >-
+      Supported by an internal audit process, SMACTR (scoping, mapping, artifact
+      collection, testing, and reflection), that produces documentation throughout
+      development. The documentation lets an organisation check a system against
+      its declared ethical expectations before deployment.
+  - source: iso-42001
+    text: >-
+      Achieved through internal audits of the AI management system at planned
+      intervals, which check conformity with the organisation's requirements and
+      the standard.
+  related:
+  - accountability
+  - transparency
+  - model-card
+- key: bias
+  term: Bias
+  alias: AI bias
+  definitions:
+  - source: nist-sp-1270
+    text: >-
+      Bias in AI falls into three categories. *Systemic* biases come from institutional
+      practices. *Statistical and computational* biases come from unrepresentative
+      data or modelling choices. *Human-cognitive* biases shape how people design,
+      interpret, and use AI systems.
+  - source: friedman-nissenbaum-1996
+    text: >-
+      Computer systems that *systematically and unfairly discriminate* against
+      certain individuals or groups in favour of others. Bias may be pre-existing,
+      technical, or emergent.
+  - source: mehrabi-2021
+    text: >-
+      Systematic errors or skews at any stage of the ML pipeline, such as data
+      collection, sampling, measurement, algorithm design, or user interaction,
+      that can lead to unfair outcomes.
+  - source: hastie-2009
+    text: >-
+      In statistics, the difference between an estimator's expected value and
+      the true value. This is a technical property with no moral meaning, and
+      is often traded off against variance.
+  note: >-
+    The statistical meaning is neutral and often intentional, as in regularisation.
+    The socio-technical meanings are about unjust outcomes. Say which meaning
+    is intended.
+  related:
+  - fairness
+  - datasets
+- key: data-poisoning
+  term: Data Poisoning
+  definitions:
+  - source: nist-ai-100-2
+    text: >-
+      An attack at training time in which an adversary controls part of the training
+      data, or the labels, to degrade model performance in general (availability
+      poisoning) or to cause targeted or backdoor behaviour (integrity poisoning).
+  - source: biggio-2012
+    text: >-
+      Injecting specially crafted training points to raise a learning algorithm's
+      test error. The paper demonstrates this against support vector machines
+      by computing the points with gradient ascent.
+  - source: owasp-llm-2025
+    text: >-
+      For large language models: manipulation of pre-training, fine-tuning, or
+      embedding data to introduce vulnerabilities, backdoors, or biases that compromise
+      security, performance, or ethical behaviour.
+  related:
+  - adversarial-example
+  - security-resilience
+  - datasets
+- key: differential-privacy
+  term: Differential Privacy
+  alias: DP
+  definitions:
+  - source: dwork-roth-2014
+    text: >-
+      A mathematical guarantee that the output of an analysis is almost equally
+      likely whether or not any single individual's data are included. A mechanism
+      $M$ is $(\varepsilon,\delta)$-differentially private if, for all neighbouring
+      datasets $D, D'$ and all sets of outputs $S$, $\Pr[M(D)\in S] \le e^{\varepsilon}\Pr[M(D')\in
+      S] + \delta$.
+  - source: nist-ai-rmf
+    at: §3.6
+    text: >-
+      One of several privacy-enhancing technologies that can support privacy-enhanced
+      AI. It may trade off against accuracy, and therefore against fairness for
+      small groups.
+  related:
+  - privacy
+- key: explainability
+  term: Explainability
+  alias: XAI
+  definitions:
+  - source: nist-ai-rmf
+    at: §3.5
+    text: >-
+      A representation of the mechanisms underlying an AI system's operation.
+      It answers the question of *how* a decision was made.
+  - source: nist-ir-8312
+    text: >-
+      Characterised by four principles. A system gives evidence or reasons for
+      its outputs (*explanation*). The explanations are understandable to their
+      audience (*meaningful*). They correctly reflect the process that produced
+      the output (*explanation accuracy*). The system operates only within its
+      designed conditions and confidence (*knowledge limits*).
+  - source: barredo-2020
+    text: >-
+      Given an audience, an explainable AI is one that produces details or reasons
+      to make its functioning clear or easy to understand.
+  - source: hleg-2019
+    text: >-
+      Part of transparency: the ability to explain both the technical processes
+      of an AI system and the related human decisions, adapted to the expertise
+      of the stakeholder concerned.
+  note: >-
+    Every definition makes explainability depend on its *audience*. NIST separates
+    it from interpretability, but many papers use the two words interchangeably.
+  related:
+  - interpretability
+  - transparency
+- key: fairness
+  term: Fairness
+  alias: algorithmic fairness
+  definitions:
+  - source: nist-ai-rmf
+    at: §3.7
+    text: >-
+      The characteristic “fair — with harmful bias managed”: concerns for equality
+      and equity, addressed by managing harmful bias and discrimination. Standards
+      of fairness are complex and differ across cultures and applications.
+  - source: dwork-2012
+    text: >-
+      *Individual fairness*: similar individuals should be treated similarly,
+      formalised as a Lipschitz condition on the classifier under a task-specific
+      similarity metric.
+  - source: hardt-2016
+    text: >-
+      *Equalised odds*: a predictor is fair if its predictions are independent
+      of a protected attribute conditional on the true outcome. That is, true-
+      and false-positive rates are equal across groups. *Equal opportunity* relaxes
+      this to equal true-positive rates.
+  - source: hleg-2019
+    text: >-
+      A requirement named *diversity, non-discrimination and fairness*. It covers
+      avoiding unfair bias, accessibility and universal design, and involving
+      stakeholders throughout the lifecycle.
+  note: >-
+    Group criteria, such as demographic parity and equalised odds, and individual
+    criteria cannot in general all be satisfied at once. Choosing among them is
+    a normative decision that should be documented.
+  related:
+  - bias
+  - accountability
+- key: human-oversight
+  term: Human Oversight
+  definitions:
+  - source: eu-ai-act
+    at: Art. 14
+    text: >-
+      High-risk AI systems must be designed and developed so that natural persons
+      can effectively oversee them while they are in use. The aim is to prevent
+      or minimise risks to health, safety, or fundamental rights, including by
+      being able to understand, monitor, override, or stop the system.
+  - source: hleg-2019
+    text: >-
+      Part of the requirement *human agency and oversight*. It may be achieved
+      through human-in-the-loop, human-on-the-loop, or human-in-command approaches,
+      which differ in how closely a human is involved.
+  - source: nist-ai-rmf
+    text: >-
+      Human roles and responsibilities in decision-making and in overseeing AI
+      systems should be clearly defined and differentiated, taking account of
+      human cognitive biases such as automation bias.
+  note: >-
+    Oversight is only effective if the overseer has the competence, authority,
+    time, and information to intervene. Without these, a human reviewer may end
+    up bearing responsibility for outcomes they could not actually control.
+  related:
+  - human-in-the-loop
+  - autonomy
+  - accountability
+- key: human-in-the-loop
+  term: Human-in-the-Loop
+  alias: HITL
+  definitions:
+  - source: hleg-2019
+    text: >-
+      The capability for human intervention in every decision cycle of the system.
+      It contrasts with *human-on-the-loop*, where humans intervene during design
+      and monitor operation, and *human-in-command*, where humans oversee overall
+      activity and decide when and how to use the system.
+  - source: mosqueira-rey-2023
+    text: >-
+      In machine learning, approaches in which humans take part in the learning
+      process, for example through active learning, interactive ML, or machine
+      teaching, so as to improve model accuracy or efficiency.
+  note: >-
+    The governance meaning concerns human control over decisions. The ML meaning
+    concerns humans contributing to training.
+  related:
+  - human-oversight
+  - rlhf
+- key: interpretability
+  term: Interpretability
+  definitions:
+  - source: doshi-velez-2017
+    quote: true
+    text: >-
+      The ability to explain or to present in understandable terms to a human.
+  - source: miller-2019
+    text: >-
+      The degree to which a human can understand the cause of a decision. Miller
+      uses it interchangeably with *explainability*.
+  - source: nist-ai-rmf
+    at: §3.5
+    text: >-
+      The meaning of an AI system's output in the context of its designed functional
+      purpose. It answers the question of *why* a decision was made and what it
+      means to the user.
+  related:
+  - explainability
+  - transparency
+- key: model-card
+  term: Model Card
+  alias: datasheet
+  definitions:
+  - source: mitchell-2019
+    text: >-
+      A short document accompanying a trained model that gives benchmarked evaluation
+      across relevant conditions, such as demographic groups, as well as intended
+      use, out-of-scope uses, evaluation procedures, and ethical considerations.
+  - source: gebru-2021
+    text: >-
+      The companion practice for data, called a *datasheet for datasets*. It documents
+      a dataset's motivation, composition, collection process, preprocessing,
+      uses, distribution, and maintenance.
+  - source: eu-ai-act
+    at: Art. 11
+    text: >-
+      Related regulatory concept: the *technical documentation* that providers
+      of high-risk AI systems must draw up before placing them on the market and
+      keep up to date.
+  related:
+  - transparency
+  - auditability
+  - datasets
+- key: privacy
+  term: Privacy
+  alias: privacy-enhanced AI
+  definitions:
+  - source: nist-ai-rmf
+    at: §3.6
+    text: >-
+      The norms and practices that help to safeguard human autonomy, identity,
+      and dignity. These include freedom from intrusion, limits on observation,
+      and individuals' agency to consent to disclosure or control of facets of
+      their identities.
+  - source: hleg-2019
+    text: >-
+      The requirement *privacy and data governance*: respect for privacy, the
+      quality and integrity of data, and legitimate access to data, throughout
+      the system's lifecycle.
+  - source: nist-ai-100-2
+    text: >-
+      The target of *privacy attacks*, such as membership inference, data reconstruction,
+      and model extraction, which aim to recover information about training data
+      or the model.
+  related:
+  - differential-privacy
+  - security-resilience
+- key: prompt-injection
+  term: Prompt Injection
+  definitions:
+  - source: nist-ai-100-2
+    text: >-
+      An attack in which an adversary inserts instructions into a generative AI
+      system's input. In *direct* prompt injection the attacker is the user. In
+      *indirect* prompt injection the instructions arrive through external content,
+      such as a web page or document, that the system consumes.
+  - source: greshake-2023
+    text: >-
+      Indirect prompt injection: planting prompts in data likely to be retrieved
+      by an LLM-integrated application, which blurs the line between data and
+      instructions and allows the attacker to control the application remotely.
+  - source: owasp-llm-2025
+    text: >-
+      A vulnerability, ranked first among risks to LLM applications, in which
+      user prompts or external content alter the model's behaviour or output in
+      unintended ways. Outcomes include data disclosure and unauthorised actions.
+  note: >-
+    Prompt injection is distinct from *jailbreaking*, which targets the model's
+    safety training. Prompt injection targets the application built around the
+    model.
+  related:
+  - prompt
+  - agentic-ai
+  - retrieval-augmented-generation
+  - security-resilience
+- key: red-teaming
+  term: Red Teaming
+  definitions:
+  - source: ganguli-2022
+    text: >-
+      Adversarially probing a language model, by human or automated means, to
+      discover and measure harmful outputs, so that the harms can be analysed
+      and reduced.
+  - source: nist-ai-600-1
+    text: >-
+      A structured testing effort, often by teams outside the development group,
+      to find flaws and vulnerabilities in a generative AI system, such as harmful
+      or discriminatory outputs, unforeseen behaviour, or potential misuse.
+  - source: eu-ai-act
+    at: Art. 55
+    text: >-
+      Adversarial testing that providers of general-purpose AI models with systemic
+      risk must carry out and document, in order to identify and mitigate systemic
+      risks.
+  related:
+  - ai-risk
+  - safety
+  - security-resilience
+- key: robustness
+  term: Robustness
+  definitions:
+  - source: iso-22989
+    text: >-
+      The ability of a system to maintain its level of performance under any circumstances,
+      including external interference and harsh environmental conditions.
+  - source: hleg-2019
+    text: >-
+      Named *technical robustness and safety*: AI systems are resilient to attack,
+      have fall-back plans, and are accurate, reliable, and reproducible, so that
+      unintentional harm is minimised.
+  - source: eu-ai-act
+    at: Art. 15
+    text: >-
+      High-risk AI systems shall be as resilient as possible to errors, faults,
+      or inconsistencies within the system or its environment, for example through
+      technical redundancy and fail-safe plans.
+  - source: madry-2018
+    text: >-
+      *Adversarial robustness*: low worst-case loss under any perturbation within
+      an allowed set, formalised as a min–max (saddle-point) optimisation problem.
+  related:
+  - adversarial-example
+  - validity-reliability
+  - distribution-shift
+- key: safety
+  term: Safety
+  alias: AI safety
+  definitions:
+  - source: nist-ai-rmf
+    at: §3.2
+    text: >-
+      AI systems should not, under defined conditions, lead to a state in which
+      human life, health, property, or the environment is endangered.
+  - source: amodei-2016
+    text: >-
+      The problem of *accidents* in ML systems: unintended and harmful behaviour
+      arising from poor design. Examples are negative side effects, reward hacking,
+      unsafe exploration, and brittleness under distributional shift.
+  - source: hleg-2019
+    text: >-
+      Part of technical robustness: AI systems are developed with a preventive
+      approach to risk, behave reliably as intended, and minimise unintentional
+      and unexpected harm.
+  note: >-
+    “AI safety” also names a research field concerned with risks from advanced
+    AI, including misalignment. In product and engineering contexts it usually
+    means freedom from unacceptable risk of physical or psychological harm.
+  related:
+  - alignment
+  - ai-risk
+  - robustness
+- key: security-resilience
+  term: Security and Resilience
+  definitions:
+  - source: nist-ai-rmf
+    at: §3.3
+    text: >-
+      An AI system is *resilient* if it can withstand unexpected adverse events
+      or changes in its environment or use, or degrade safely and gracefully.
+      It is *secure* if it maintains confidentiality, integrity, and availability
+      through mechanisms that prevent unauthorised access and use.
+  - source: eu-ai-act
+    at: Art. 15
+    text: >-
+      Cybersecurity: high-risk AI systems shall be resilient against attempts
+      by unauthorised third parties to alter their use, outputs, or performance
+      by exploiting vulnerabilities. Examples include data poisoning, model poisoning,
+      adversarial examples, and confidentiality attacks.
+  - source: nist-ai-100-2
+    text: >-
+      Adversarial machine learning classifies attacks by the attacker's goals
+      (availability, integrity, privacy, and misuse), capabilities, knowledge,
+      and the stage of the ML lifecycle they target.
+  related:
+  - adversarial-example
+  - data-poisoning
+  - prompt-injection
+  - robustness
+- key: transparency
+  term: Transparency
+  definitions:
+  - source: nist-ai-rmf
+    at: §3.4
+    text: >-
+      The extent to which information about an AI system and its outputs is available
+      to the individuals who interact with it, whether or not they know they are
+      doing so.
+  - source: hleg-2019
+    text: >-
+      A requirement covering *traceability* of data and processes, *explainability*,
+      and *communication*. People are told when they are interacting with an AI
+      system, and they are told its capabilities and limitations.
+  - source: eu-ai-act
+    at: Art. 13
+    text: >-
+      High-risk AI systems shall be designed so that their operation is sufficiently
+      transparent to enable deployers to interpret the system's output and use
+      it appropriately. The systems are accompanied by instructions for use.
+  - source: eu-ai-act
+    at: Art. 50
+    text: >-
+      Transparency obligations toward the people affected: for example, disclosing
+      that they are interacting with an AI system, and marking synthetic or deep-fake
+      content.
+  related:
+  - explainability
+  - accountability
+  - model-card
+- key: trustworthy-ai
+  term: Trustworthy AI
+  definitions:
+  - source: hleg-2019
+    text: >-
+      AI that is *lawful*, *ethical*, and *robust*. It is realised through seven
+      requirements: human agency and oversight; technical robustness and safety;
+      privacy and data governance; transparency; diversity, non-discrimination
+      and fairness; societal and environmental well-being; and accountability.
+  - source: nist-ai-rmf
+    at: §3
+    text: >-
+      AI that has these characteristics: valid and reliable; safe; secure and
+      resilient; accountable and transparent; explainable and interpretable; privacy-enhanced;
+      and fair with harmful bias managed. Validity and reliability are the base
+      for the others, and the characteristics must be balanced against each other
+      in context.
+  - source: iso-24028
+    text: >-
+      Rests on *trustworthiness*: the ability to meet stakeholders' expectations
+      in a verifiable way. For AI this covers characteristics such as reliability,
+      availability, resilience, security, privacy, safety, accountability, transparency,
+      integrity, authenticity, quality, and usability.
+  - source: oecd-2024
+    text: >-
+      AI that respects the OECD values-based principles: inclusive growth, sustainable
+      development and well-being; human rights and democratic values, including
+      fairness and privacy; transparency and explainability; robustness, security
+      and safety; and accountability.
+  note: >-
+    The frameworks overlap heavily but are organised differently. The EU HLEG
+    starts from ethics and fundamental rights, NIST from risk management, and
+    ISO/IEC from verifiable stakeholder expectations.
+  related:
+  - accountability
+  - explainability
+  - fairness
+  - privacy
+  - robustness
+  - safety
+  - transparency
+  - validity-reliability
+- key: validity-reliability
+  term: Validity and Reliability
+  definitions:
+  - source: nist-ai-rmf
+    at: §3.1
+    text: >-
+      *Validation* is confirmation, through objective evidence, that the requirements
+      for a specific intended use have been fulfilled. *Reliability* is the ability
+      of an item to perform as required, without failure, for a given time interval
+      under given conditions. Accuracy and robustness contribute to both.
+  - source: iso-22989
+    text: >-
+      Reliability is the property of consistent intended behaviour and results.
+  - source: hleg-2019
+    text: >-
+      Part of technical robustness: a reliable system works properly across a
+      range of inputs and situations, and reproducibility means it behaves the
+      same way when an experiment is repeated under the same conditions.
+  note: >-
+    NIST treats validity and reliability as the foundation of trustworthiness.
+    A system that is not valid for its context cannot be made trustworthy by adding
+    the other characteristics.
+  related:
+  - robustness
+  - trustworthy-ai
+  - distribution-shift

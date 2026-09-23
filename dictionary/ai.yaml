@@ -1,0 +1,386 @@
+# Artificial Intelligence terms, in alphabetical order.
+domain: Artificial Intelligence
+terms:
+- key: agent
+  term: Agent
+  definitions:
+  - source: russell-norvig-2021
+    quote: true
+    text: >-
+      An agent is anything that can be viewed as perceiving its environment through
+      sensors and acting upon that environment through actuators.
+  - source: wooldridge-1995
+    text: >-
+      A hardware or, more usually, software-based computer system with four properties:
+      autonomy (it operates without direct human intervention), social ability
+      (it interacts with other agents or humans), reactivity (it perceives and
+      responds to changes in its environment), and pro-activeness (it takes the
+      initiative to pursue goals).
+  - source: iso-22989
+    text: >-
+      An automated entity that senses and responds to its environment and takes
+      actions to achieve its goals.
+  note: >-
+    Russell and Norvig's definition is deliberately broad and includes a thermostat.
+    Wooldridge and Jennings add requirements, such as autonomy and goal-directedness,
+    that separate agents from ordinary programs.
+  related:
+  - agentic-ai
+  - autonomy
+  - ai-system
+- key: agentic-ai
+  term: Agentic AI
+  alias: AI agent
+  definitions:
+  - source: shavit-2023
+    text: >-
+      AI systems that can pursue complex goals with limited direct supervision,
+      including by taking actions in the world that were not specified step by
+      step by a human.
+  - source: chan-2023
+    text: >-
+      Algorithmic systems that show increasing degrees of agency. Agency has four
+      characteristics: goals are given without specifying how to reach them; actions
+      have an impact without a human intermediary; behaviour is goal-directed;
+      and the system plans over the long term.
+  - source: owasp-llm-2025
+    text: >-
+      LLM-based systems granted *agency*: the ability to call functions, use tools,
+      or interface with other systems in response to prompts. “Excessive agency”
+      is the risk that such functionality, permissions, or autonomy go beyond
+      what the task needs.
+  note: >-
+    “Agentic” is best understood as a matter of degree rather than a binary property.
+    Governance frameworks usually focus on the delegation of actions, and on who
+    is accountable for them.
+  related:
+  - agent
+  - autonomy
+  - human-oversight
+  - prompt-injection
+- key: ai-system
+  term: AI System
+  definitions:
+  - source: eu-ai-act
+    at: Art. 3(1)
+    quote: true
+    text: >-
+      A machine-based system that is designed to operate with varying levels of
+      autonomy and that may exhibit adaptiveness after deployment, and that, for
+      explicit or implicit objectives, infers, from the input it receives, how
+      to generate outputs such as predictions, content, recommendations, or decisions
+      that can influence physical or virtual environments.
+  - source: oecd-2024
+    quote: true
+    text: >-
+      A machine-based system that, for explicit or implicit objectives, infers,
+      from the input it receives, how to generate outputs such as predictions,
+      content, recommendations, or decisions that can influence physical or virtual
+      environments. Different AI systems vary in their levels of autonomy and
+      adaptiveness after deployment.
+  - source: nist-ai-rmf
+    quote: true
+    text: >-
+      An engineered or machine-based system that can, for a given set of objectives,
+      generate outputs such as predictions, recommendations, or decisions influencing
+      real or virtual environments.
+  - source: iso-22989
+    text: >-
+      An engineered system that generates outputs such as content, forecasts,
+      recommendations, or decisions for a given set of human-defined objectives.
+  note: >-
+    The EU and OECD definitions were aligned in 2023–2024 and both make *inference*
+    the distinguishing feature. That excludes conventional software whose rules
+    are defined only by humans. The NIST and ISO/IEC definitions predate this
+    change and do not use the inference test.
+  related:
+  - artificial-intelligence
+  - autonomy
+  - general-purpose-ai
+- key: agi
+  term: Artificial General Intelligence
+  alias: AGI
+  definitions:
+  - source: goertzel-2007
+    text: >-
+      AI systems with the ability to solve a wide variety of problems in a wide
+      variety of contexts, including problems they were not specifically designed
+      for, as opposed to systems built for one narrow task.
+  - source: morris-2024
+    text: >-
+      A system whose capabilities match or exceed those of skilled humans across
+      a wide range of non-physical tasks, including the ability to learn new tasks.
+      AGI is best characterised by levels of performance and generality, not a
+      single threshold.
+  - source: searle-1980
+    text: >-
+      Related to “strong AI”: the claim that an appropriately programmed computer
+      does not merely simulate a mind but literally has cognitive states and understanding.
+  note: >-
+    No agreed operational definition exists. Searle's strong AI is a philosophical
+    claim about minds, whereas modern usage, as in Morris et al., is about measurable
+    capability.
+  related:
+  - narrow-ai
+  - artificial-intelligence
+- key: artificial-intelligence
+  term: Artificial Intelligence
+  alias: AI
+  definitions:
+  - source: mccarthy-2007
+    quote: true
+    text: >-
+      It is the science and engineering of making intelligent machines, especially
+      intelligent computer programs.
+  - source: nilsson-2010
+    quote: true
+    text: >-
+      Artificial intelligence is that activity devoted to making machines intelligent,
+      and intelligence is that quality that enables an entity to function appropriately
+      and with foresight in its environment.
+  - source: russell-norvig-2021
+    text: >-
+      The study and construction of agents that act rationally, meaning that they
+      do the right thing given what they know, as opposed to the study of systems
+      that think or act like humans.
+  - source: iso-22989
+    text: >-
+      The research and development of mechanisms and applications of AI systems.
+      The term also names the discipline itself.
+  note: >-
+    The earlier academic definitions describe a *field of study*, while standards
+    and regulation mostly define the *AI system*. When applicability or compliance
+    is at stake, use the system-level definitions.
+  related:
+  - ai-system
+  - machine-learning
+  - agent
+- key: autonomy
+  term: Autonomy
+  definitions:
+  - source: eu-ai-act
+    at: Recital 12
+    text: >-
+      The degree to which an AI system's actions are independent of human involvement,
+      and its ability to operate without human intervention.
+  - source: iso-22989
+    text: >-
+      A characteristic of a system that can modify its intended domain of use
+      or goals without external intervention, control, or oversight. Levels of
+      automation run from none, through heteronomous systems under human control,
+      to autonomous systems.
+  - source: wooldridge-1995
+    text: >-
+      The ability of an agent to operate without the direct intervention of humans
+      or others, having some control over its own actions and internal state.
+  note: >-
+    ISO/IEC 22989 separates *automation*, which is carrying out a human-defined
+    task, from *autonomy*, which includes changing goals. Much everyday use of
+    “autonomous” refers only to high automation.
+  related:
+  - agent
+  - agentic-ai
+  - human-oversight
+- key: foundation-model
+  term: Foundation Model
+  definitions:
+  - source: bommasani-2021
+    quote: true
+    text: >-
+      Any model that is trained on broad data (generally using self-supervision
+      at scale) that can be adapted (e.g., fine-tuned) to a wide range of downstream
+      tasks.
+  - source: nist-ai-600-1
+    text: >-
+      Discussed via the “dual-use foundation model”: an AI model trained on broad
+      data, generally using self-supervision, with at least tens of billions of
+      parameters, that is applicable across a wide range of contexts and could
+      pose serious risks to security, public health, or safety.
+  - source: eu-ai-act
+    at: Art. 3(63)
+    text: >-
+      Treated in the regulation as a “general-purpose AI model”. See that entry.
+  note: >-
+    The term was coined to stress that one model is a shared, and therefore single-point-of-failure,
+    basis for many applications. Regulators generally use “general-purpose AI”
+    instead.
+  related:
+  - general-purpose-ai
+  - large-language-model
+  - fine-tuning
+  - self-supervised-learning
+- key: general-purpose-ai
+  term: General-Purpose AI Model
+  alias: GPAI
+  definitions:
+  - source: eu-ai-act
+    at: Art. 3(63)
+    text: >-
+      An AI model, including one trained with a large amount of data using self-supervision
+      at scale, that displays significant generality, is capable of competently
+      performing a wide range of distinct tasks, and can be integrated into a
+      variety of downstream systems or applications. Models used only for research,
+      development, or prototyping before being placed on the market are excluded.
+  - source: eu-ai-act
+    at: Art. 3(66)
+    text: >-
+      A *general-purpose AI system* is an AI system based on a general-purpose
+      AI model that can serve a variety of purposes, both for direct use and for
+      integration into other AI systems.
+  note: >-
+    The EU AI Act separates the *model* from the *system* built on it and assigns
+    obligations to each. It adds further obligations for models with “systemic
+    risk”.
+  related:
+  - foundation-model
+  - ai-system
+- key: generative-ai
+  term: Generative AI
+  alias: GenAI
+  definitions:
+  - source: nist-ai-600-1
+    text: >-
+      The class of AI models that emulate the structure and characteristics of
+      input data in order to generate derived synthetic content, such as images,
+      videos, audio, text, and other digital content.
+  - source: goodfellow-2016
+    at: ch. 20
+    text: >-
+      Models that learn a probability distribution over data, explicitly or implicitly,
+      and can draw new samples from it. Examples are variational autoencoders,
+      generative adversarial networks, and autoregressive models.
+  - source: eu-ai-act
+    at: Art. 50
+    text: >-
+      AI systems, including general-purpose AI systems, that generate synthetic
+      audio, image, video, or text content. Their providers must mark outputs
+      as artificially generated in a machine-readable format.
+  note: >-
+    The policy definitions refer to outputs (synthetic content). The technical
+    definition refers to what the model learns (a data distribution).
+  related:
+  - large-language-model
+  - foundation-model
+  - hallucination
+- key: hallucination
+  term: Hallucination
+  alias: confabulation
+  definitions:
+  - source: ji-2023-hallucination
+    text: >-
+      Generated content that is nonsensical or unfaithful to the provided source
+      content. *Intrinsic* hallucinations contradict the source, and *extrinsic*
+      hallucinations cannot be verified from it.
+  - source: nist-ai-600-1
+    text: >-
+      Termed *confabulation*: the production of confidently stated but erroneous
+      or false content, which may mislead or deceive users.
+  - source: zhao-2023
+    text: >-
+      Content generated by a large language model that is factually incorrect
+      or inconsistent with its input or context, but presented fluently and plausibly.
+  note: >-
+    NIST prefers “confabulation” to avoid attributing perception to the system.
+    Research usage separates unfaithfulness to a given source from factual error
+    about the world.
+  related:
+  - large-language-model
+  - retrieval-augmented-generation
+  - validity-reliability
+- key: large-language-model
+  term: Large Language Model
+  alias: LLM
+  definitions:
+  - source: zhao-2023
+    text: >-
+      A Transformer-based language model with a very large number of parameters,
+      typically billions or more, that is pre-trained on massive text corpora
+      and shows abilities, such as in-context learning, that are not found in
+      smaller models.
+  - source: brown-2020
+    text: >-
+      An autoregressive language model that, at sufficient scale, can perform
+      new tasks from a natural-language instruction or a few examples in its prompt,
+      without updating its weights.
+  - source: bommasani-2021
+    text: >-
+      The most prominent kind of foundation model: a language model trained on
+      broad text data that is adapted, by fine-tuning or prompting, to many downstream
+      language tasks.
+  note: >-
+    “Large” is relative and has shifted over time. The defining features in practice
+    are pre-training at scale and general-purpose prompting.
+  related:
+  - foundation-model
+  - transformer
+  - prompt
+  - hallucination
+- key: narrow-ai
+  term: Narrow AI
+  alias: weak AI
+  definitions:
+  - source: goertzel-2007
+    text: >-
+      AI systems designed and trained for a specific task or a narrow range of
+      tasks, which cannot generalise outside that domain without being redesigned
+      or retrained.
+  - source: searle-1980
+    text: >-
+      “Weak AI”: the position that computers are powerful tools for studying and
+      simulating the mind, without any claim that the simulation itself has understanding.
+  - source: morris-2024
+    text: >-
+      Systems with high performance on a clearly scoped task, such as a chess
+      engine or a protein-structure predictor, placed on the *narrow* end of a
+      generality scale.
+  related:
+  - agi
+  - artificial-intelligence
+- key: prompt
+  term: Prompt
+  definitions:
+  - source: liu-2023-prompt
+    text: >-
+      The input text, often a template with slots to be filled, that is given
+      to a pre-trained language model so that the desired task is framed as text
+      the model can continue or complete.
+  - source: nist-ai-100-2
+    text: >-
+      The input to a generative AI model. In deployed applications it combines
+      a *system prompt* written by the application developer with user input and,
+      often, content retrieved from external resources.
+  - source: brown-2020
+    text: >-
+      The context given to a model at inference time, which may contain a task
+      description and zero, one, or a few demonstrations, as in *zero-shot*, *one-shot*,
+      and *few-shot* prompting.
+  related:
+  - large-language-model
+  - prompt-injection
+- key: retrieval-augmented-generation
+  term: Retrieval-Augmented Generation
+  alias: RAG
+  definitions:
+  - source: lewis-2020
+    text: >-
+      A method that combines a pre-trained parametric generator with a non-parametric
+      memory, such as a dense vector index of documents. Retrieved passages condition
+      the generation.
+  - source: gao-2023-rag
+    text: >-
+      A paradigm that enhances large language models by retrieving relevant information
+      from external knowledge bases at inference time. It improves accuracy and
+      credibility, especially for knowledge-intensive tasks, and allows knowledge
+      to be updated without retraining.
+  - source: zhao-2023
+    text: >-
+      A form of *retrieval augmentation* for large language models that injects
+      relevant external knowledge into the prompt to improve factuality and to
+      give access to up-to-date or private information.
+  note: >-
+    RAG reduces hallucination but introduces new risks. Retrieved content can
+    carry an indirect prompt injection.
+  related:
+  - hallucination
+  - prompt-injection
+  - embedding

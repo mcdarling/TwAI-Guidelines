@@ -1,0 +1,115 @@
+/* Dictionary entry styling on top of the Furo theme. */
+
+:root {
+  --twai-nist: #1f6fb2;
+  --twai-iso: #2e7d5b;
+  --twai-eu: #7a4fb5;
+  --twai-oecd: #b35c1e;
+  --twai-ieee: #00629b;
+  --twai-unesco: #0077a8;
+  --twai-coe: #a33a5b;
+  --twai-owasp: #6b6b6b;
+  --twai-academic: #7b6a48;
+}
+
+/* Term headings: a rule under each, like the PDF. */
+article h2 {
+  margin-top: 2.5rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--color-background-border);
+}
+
+.term-alias {
+  margin-top: -0.5rem;
+  color: var(--color-foreground-secondary);
+  font-style: italic;
+}
+
+/* Numbered definitions. */
+ol.defs {
+  padding-left: 1.6rem;
+}
+ol.defs > li {
+  margin-bottom: 0.9rem;
+  padding-left: 0.2rem;
+}
+ol.defs > li::marker {
+  font-weight: 700;
+  color: var(--color-brand-primary);
+}
+ol.defs > li > p {
+  margin: 0;
+}
+
+/* Source label: a coloured pill per organisation. */
+span.src {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0.05rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  white-space: nowrap;
+  color: #fff;
+  background: var(--twai-academic);
+  vertical-align: baseline;
+}
+span.src a,
+span.src a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+span.src a:hover {
+  text-decoration: underline;
+}
+span.src .std-ref {
+  font-weight: 600;
+}
+span.body-nist { background: var(--twai-nist); }
+span.body-iso-iec { background: var(--twai-iso); }
+span.body-eu-ai-act,
+span.body-eu-hleg { background: var(--twai-eu); }
+span.body-oecd { background: var(--twai-oecd); }
+span.body-ieee { background: var(--twai-ieee); }
+span.body-unesco { background: var(--twai-unesco); }
+span.body-council-of-europe { background: var(--twai-coe); }
+span.body-owasp { background: var(--twai-owasp); }
+
+/* Quoted / adapted marker. */
+span.kind {
+  margin-left: 0.3rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-foreground-muted);
+}
+span.kind-quoted {
+  color: var(--color-brand-primary);
+  font-weight: 600;
+}
+
+.see-also,
+.cited-by {
+  font-size: 0.9rem;
+  color: var(--color-foreground-secondary);
+}
+.cited-by {
+  margin-top: -0.6rem;
+  margin-bottom: 1.2rem;
+}
+
+/* Domain chips on the A–Z page. */
+span.chip {
+  margin-left: 0.4rem;
+  padding: 0 0.45rem;
+  border: 1px solid var(--color-background-border);
+  border-radius: 4px;
+  font-size: 0.72rem;
+  color: var(--color-foreground-secondary);
+}
+
+/* Coverage table: centre the count columns. */
+table.docutils td:not(:first-child),
+table.docutils th:not(:first-child) {
+  text-align: center;
+}
