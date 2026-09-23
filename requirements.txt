@@ -1,0 +1,6 @@
+sphinx>=8
+myst-parser>=4
+sphinx-design
+furo
+pybtex
+pyyaml

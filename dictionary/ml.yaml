@@ -1,0 +1,458 @@
+# Machine Learning terms, in alphabetical order.
+domain: Machine Learning
+terms:
+- key: deep-learning
+  term: Deep Learning
+  alias: DL
+  definitions:
+  - source: lecun-2015
+    text: >-
+      Representation-learning methods with multiple levels of representation,
+      obtained by composing simple non-linear modules that each transform the
+      representation at one level into a more abstract representation at the next.
+  - source: goodfellow-2016
+    at: ch. 1
+    text: >-
+      An approach to AI in which computers learn from experience and understand
+      the world as a hierarchy of concepts, each defined in relation to simpler
+      ones. The depth of that hierarchy gives the field its name.
+  - source: iso-22989
+    text: >-
+      An approach to creating rich hierarchical representations by training neural
+      networks with many hidden layers.
+  related:
+  - neural-network
+  - machine-learning
+  - transformer
+- key: distribution-shift
+  term: Distribution Shift
+  alias: dataset shift, drift
+  definitions:
+  - source: quinonero-2009
+    text: >-
+      The situation in which the joint distribution of inputs and outputs differs
+      between the training and test (or deployment) stages. Special cases include
+      covariate shift, where input distributions change, and prior probability
+      shift.
+  - source: gama-2014
+    text: >-
+      *Concept drift*: a change over time in the relationship between input data
+      and the target variable, which makes a model learned on past data less accurate.
+  - source: nist-ai-rmf
+    text: >-
+      A risk specific to AI: data used to build a system may not represent the
+      context of use, and the conditions of deployment may change, so that performance
+      and trustworthiness degrade after deployment.
+  note: >-
+    “Data drift” usually means a change in the input distribution. “Concept drift”
+    means a change in the input–output relationship. Both motivate post-deployment
+    monitoring.
+  related:
+  - generalization
+  - robustness
+  - validity-reliability
+- key: embedding
+  term: Embedding
+  definitions:
+  - source: bengio-2003
+    text: >-
+      A learned, distributed feature vector that represents a discrete symbol,
+      such as a word, in a continuous space, so that similar symbols have similar
+      vectors.
+  - source: mikolov-2013
+    text: >-
+      A continuous vector representation of words, learned from large corpora,
+      in which semantic and syntactic regularities appear as vector offsets.
+  - source: goodfellow-2016
+    at: ch. 15
+    text: >-
+      Any learned representation that maps inputs to points in a vector space
+      where distances reflect a notion of similarity useful for a task.
+  related:
+  - deep-learning
+  - retrieval-augmented-generation
+- key: fine-tuning
+  term: Fine-Tuning
+  definitions:
+  - source: howard-ruder-2018
+    text: >-
+      Adapting a model pre-trained on a large general corpus to a target task
+      by continuing to train some or all of its parameters on task-specific data.
+  - source: bommasani-2021
+    text: >-
+      One form of *adaptation*, in which a foundation model's parameters are updated
+      on downstream data. It contrasts with prompting, which leaves parameters
+      unchanged.
+  - source: iso-22989
+    text: >-
+      Additional training of a pre-trained model on a smaller, task- or domain-specific
+      dataset.
+  related:
+  - transfer-learning
+  - foundation-model
+  - rlhf
+- key: generalization
+  term: Generalization
+  definitions:
+  - source: goodfellow-2016
+    at: §5.2
+    text: >-
+      The ability of a model to perform well on previously unobserved inputs,
+      not only on the inputs it was trained on.
+  - source: hastie-2009
+    at: ch. 7
+    text: >-
+      Measured by the *generalisation* (test) error: the expected prediction error
+      of a model on an independent sample from the same distribution as the training
+      data.
+  - source: iso-22989
+    text: >-
+      The ability of a machine learning model to make predictions that are as
+      accurate on new data as on training data.
+  note: >-
+    Classical generalisation assumes that test data come from the same distribution
+    as training data. Generalisation under distribution shift is a harder, separate
+    problem.
+  related:
+  - overfitting
+  - distribution-shift
+  - datasets
+- key: gradient-descent
+  term: Gradient Descent
+  definitions:
+  - source: goodfellow-2016
+    at: §4.3
+    text: >-
+      An optimisation method that decreases a function by repeatedly moving its
+      parameters a small step in the direction of the negative gradient.
+  - source: bishop-2006
+    at: §5.2.4
+    text: >-
+      An iterative method for training models in which each update moves the weights
+      in the direction of steepest decrease of the error function. *Stochastic*
+      or *online* gradient descent updates on one data point, or a small batch,
+      at a time.
+  related:
+  - loss-function
+  - neural-network
+- key: hyperparameter
+  term: Hyperparameter
+  definitions:
+  - source: goodfellow-2016
+    at: §5.3
+    text: >-
+      A setting that controls a learning algorithm's behaviour and is not adapted
+      by the algorithm itself, such as model capacity or learning rate. Hyperparameters
+      are usually chosen with a validation set.
+  - source: iso-22989
+    text: >-
+      A characteristic of a machine learning algorithm that affects its learning
+      process. It is selected before training rather than learned from the training
+      data.
+  - source: bishop-2006
+    text: >-
+      A parameter of a prior distribution or of the model family, rather than
+      a parameter fitted directly to the data. Examples are regularisation coefficients
+      and the number of basis functions.
+  related:
+  - datasets
+  - model
+- key: loss-function
+  term: Loss Function
+  alias: cost function, objective
+  definitions:
+  - source: goodfellow-2016
+    at: §4.3
+    text: >-
+      The function to be minimised during training, also called the cost, error,
+      or objective function. It measures how far a model's outputs are from the
+      targets.
+  - source: hastie-2009
+    at: §2.4
+    text: >-
+      A function $L(Y, f(X))$ that penalises errors in prediction. Examples are
+      squared-error loss for regression and 0–1 loss for classification.
+  - source: sutton-barto-2018
+    text: >-
+      In reinforcement learning, the role of the loss is played by a *reward signal*
+      to be maximised rather than an error to be minimised.
+  related:
+  - gradient-descent
+  - alignment
+- key: machine-learning
+  term: Machine Learning
+  alias: ML
+  definitions:
+  - source: mitchell-1997
+    quote: true
+    text: >-
+      A computer program is said to learn from experience $E$ with respect to
+      some class of tasks $T$ and performance measure $P$, if its performance
+      at tasks in $T$, as measured by $P$, improves with experience $E$.
+  - source: samuel-1959
+    text: >-
+      The field of study that gives computers the ability to learn without being
+      explicitly programmed. This wording is widely attributed to Samuel but does
+      not appear verbatim in the paper.
+  - source: iso-22989
+    text: >-
+      The process of optimising model parameters through computational techniques
+      so that the model's behaviour reflects the data or experience.
+  - source: goodfellow-2016
+    at: ch. 1
+    text: >-
+      The ability of AI systems to acquire their own knowledge by extracting patterns
+      from raw data.
+  note: >-
+    Mitchell's definition is operational and testable. ISO/IEC 22989 describes
+    the mechanism, parameter optimisation, and is the one most often used in governance
+    documents.
+  related:
+  - artificial-intelligence
+  - supervised-learning
+  - unsupervised-learning
+  - reinforcement-learning
+- key: model
+  term: Model
+  alias: ML model
+  definitions:
+  - source: iso-22989
+    text: >-
+      A mathematical construct that generates an inference or prediction from
+      input data. A *machine learning model* is a model produced by training on
+      data.
+  - source: eu-ai-act
+    at: Recital 97
+    text: >-
+      Distinguished from an *AI system*: a model is a component that needs further
+      elements, such as a user interface, to become a system.
+  - source: bishop-2006
+    at: ch. 1
+    text: >-
+      A parametric function, or a probability distribution, whose parameters are
+      fitted to data so that it can predict target values for new inputs.
+  related:
+  - ai-system
+  - hyperparameter
+  - model-card
+- key: neural-network
+  term: Neural Network
+  alias: artificial neural network
+  definitions:
+  - source: iso-22989
+    text: >-
+      A network of one or more layers of neurons, connected by weighted links
+      with adjustable weights, that takes input data and produces an output.
+  - source: goodfellow-2016
+    at: ch. 6
+    text: >-
+      A *feedforward network* defines a mapping $y = f(x; \theta)$ as a composition
+      of many simpler functions, or layers, and learns the parameters $\theta$
+      that give the best function approximation.
+  - source: bishop-2006
+    at: ch. 5
+    text: >-
+      A flexible class of parametric non-linear functions made of successive linear
+      combinations and non-linear activation functions, with parameters fitted
+      by optimisation.
+  related:
+  - deep-learning
+  - transformer
+  - gradient-descent
+- key: overfitting
+  term: Overfitting
+  definitions:
+  - source: goodfellow-2016
+    at: §5.2
+    text: >-
+      Occurs when the gap between the training error and the test error is too
+      large, because the model has memorised properties of the training set that
+      do not hold for new data.
+  - source: iso-22989
+    text: >-
+      Creating a model that fits the training data too precisely and therefore
+      fails to generalise to new data.
+  - source: bishop-2006
+    at: §1.1
+    text: >-
+      The phenomenon in which an overly flexible model fits noise in the training
+      data, giving small training error but poor predictions on new inputs.
+  related:
+  - generalization
+  - datasets
+- key: reinforcement-learning
+  term: Reinforcement Learning
+  alias: RL
+  definitions:
+  - source: sutton-barto-2018
+    quote: true
+    text: >-
+      Reinforcement learning is learning what to do—how to map situations to actions—so
+      as to maximize a numerical reward signal.
+  - source: iso-22989
+    text: >-
+      Learning an optimal sequence of actions to maximise a cumulative reward,
+      through trial-and-error interaction with an environment.
+  - source: russell-norvig-2021
+    text: >-
+      Learning in which an agent learns from a series of reinforcements, rewards
+      and punishments, how to act so as to maximise expected utility.
+  related:
+  - rlhf
+  - agent
+  - machine-learning
+- key: rlhf
+  term: Reinforcement Learning from Human Feedback
+  alias: RLHF
+  definitions:
+  - source: christiano-2017
+    text: >-
+      Learning a reward function from human judgements comparing pairs of agent
+      behaviours, and optimising a policy against that learned reward, where writing
+      a reward by hand is impractical.
+  - source: ouyang-2022
+    text: >-
+      A procedure for aligning language models with user intent. A pre-trained
+      model is fine-tuned on demonstrations, a reward model is trained on human
+      rankings of outputs, and the model is then optimised against the reward
+      model with reinforcement learning.
+  - source: ji-2023-alignment
+    text: >-
+      A family of *learning from feedback* techniques used for forward alignment,
+      in which human preference signals steer model behaviour toward intended
+      values.
+  related:
+  - alignment
+  - fine-tuning
+  - reinforcement-learning
+- key: self-supervised-learning
+  term: Self-Supervised Learning
+  alias: SSL
+  definitions:
+  - source: liu-2021-ssl
+    text: >-
+      Learning in which supervisory signals are derived automatically from the
+      data itself, for example by predicting masked or future parts of the input.
+      It needs no human-annotated labels.
+  - source: bommasani-2021
+    text: >-
+      The training method behind foundation models. A model is trained on unlabelled
+      data with an objective derived from the data, such as predicting the next
+      word.
+  - source: iso-22989
+    text: >-
+      Machine learning that uses unlabelled data and automatically generated labels.
+      It is sometimes treated as a subset of unsupervised learning.
+  related:
+  - foundation-model
+  - unsupervised-learning
+- key: supervised-learning
+  term: Supervised Learning
+  definitions:
+  - source: iso-22989
+    text: Machine learning that uses only labelled data during training.
+  - source: hastie-2009
+    at: ch. 2
+    text: >-
+      Learning to predict an outcome from inputs using a training set of observed
+      input–outcome pairs, where the outcome acts as a “teacher” guiding learning.
+  - source: goodfellow-2016
+    at: §5.1.3
+    text: >-
+      Learning from a dataset in which each example is associated with a label
+      or target, typically in order to estimate $p(y \mid x)$.
+  related:
+  - unsupervised-learning
+  - self-supervised-learning
+  - datasets
+- key: datasets
+  term: Training, Validation, and Test Data
+  definitions:
+  - source: iso-22989
+    text: >-
+      *Training data* are samples used to train a machine learning model. *Validation
+      data* are samples used to tune hyperparameters or compare candidate models.
+      *Test data* are samples, independent of the training data, used to assess
+      the performance of the final model.
+  - source: hastie-2009
+    at: §7.2
+    text: >-
+      In a data-rich setting, the data are divided into three parts. The training
+      set fits the models, the validation set estimates prediction error for model
+      selection, and the test set assesses the generalisation error of the chosen
+      model. The test set should be kept “in a vault” until the end.
+  - source: goodfellow-2016
+    at: §5.3
+    text: >-
+      The test set estimates generalisation error and must not influence model
+      choices. A validation set, held out from the training data, is used to set
+      hyperparameters.
+  note: >-
+    In some communities, especially medicine, “validation” means *external* evaluation
+    on new data, which is close to what ML calls testing. Check which meaning
+    a document uses.
+  related:
+  - generalization
+  - overfitting
+  - hyperparameter
+- key: transfer-learning
+  term: Transfer Learning
+  definitions:
+  - source: pan-yang-2010
+    text: >-
+      Improving learning of a target task in a target domain by using knowledge
+      from a different source domain or task, particularly when target data are
+      scarce.
+  - source: goodfellow-2016
+    at: §15.2
+    text: >-
+      Using what has been learned in one setting, such as one distribution or
+      task, to improve generalisation in another setting.
+  - source: bommasani-2021
+    text: >-
+      The mechanism that makes foundation models possible: knowledge learned during
+      pre-training on a surrogate task is transferred to downstream tasks through
+      adaptation.
+  related:
+  - fine-tuning
+  - foundation-model
+- key: transformer
+  term: Transformer
+  definitions:
+  - source: vaswani-2017
+    quote: true
+    text: >-
+      A new simple network architecture, the Transformer, based solely on attention
+      mechanisms, dispensing with recurrence and convolutions entirely.
+  - source: zhao-2023
+    text: >-
+      The standard backbone of large language models. It uses stacked multi-head
+      self-attention and feed-forward layers, and its parallelism allows training
+      on very large corpora.
+  - source: bommasani-2021
+    text: >-
+      An architecture whose scalability and ability to handle multiple modalities
+      made it the dominant basis of foundation models.
+  related:
+  - large-language-model
+  - neural-network
+  - deep-learning
+- key: unsupervised-learning
+  term: Unsupervised Learning
+  definitions:
+  - source: iso-22989
+    text: Machine learning that uses only unlabelled data during training.
+  - source: hastie-2009
+    at: ch. 14
+    text: >-
+      Learning without a “teacher”: inferring properties of the probability density
+      of the inputs directly, for example through clustering, density estimation,
+      or dimensionality reduction.
+  - source: goodfellow-2016
+    at: §5.1.3
+    text: >-
+      Learning useful properties of the structure of a dataset, often the probability
+      distribution that generated it, from examples without labels.
+  related:
+  - supervised-learning
+  - self-supervised-learning
