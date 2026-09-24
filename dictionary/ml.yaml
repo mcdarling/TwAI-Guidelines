@@ -20,6 +20,62 @@ terms:
   related:
   - distribution-shift
   - reliability
+- key: cost-sensitive-learning
+  term: Cost-Sensitive Learning
+  definitions:
+  - source: elkan-2001
+    text: >-
+      Learning when different kinds of misclassification have different costs,
+      specified by a cost matrix. The optimal prediction for an example is the
+      class that minimises its expected cost, which is not necessarily the most
+      probable class.
+  - source: field-darling-2022
+    at: pp. 7–8
+    text: >-
+      Minimising expected error costs by incorporating the relative costs of different
+      error types and class-imbalance information into training, which averages
+      cost over a population of examples. It contrasts with making decisions that
+      are optimal per instance, using the uncertainty of each individual prediction.
+  related:
+  - decision-theory
+  - loss-function
+  - minimum-prediction-deviation
+- key: decision-theory
+  term: Decision Theory
+  definitions:
+  - source: field-darling-2022
+    at: §2.1.1, p. 10
+    quote: true
+    text: >-
+      A decision problem exists when there is a choice of possible actions to
+      take; the consequence of these actions depends on the (unknown) truth, typically
+      referred to as the “state of nature” in the decision theory literature.
+  - source: field-darling-2022
+    at: §2.1.1, §3.4, pp. 10–25
+    text: >-
+      A decision problem has four ingredients: a collection of possible actions,
+      a collection of possible states of nature, a loss function, and the optimal
+      action, which minimises the expected loss. Under uncertainty in a classifier’s
+      output, the decision is made only if the model can be trusted on the instance,
+      as judged by measures such as minimum prediction deviation and local outlier
+      factor.
+  - source: berger-1985
+    text: >-
+      The study of making decisions in the presence of uncertainty about the state
+      of nature, combining statistical knowledge about that state with the losses
+      incurred by each possible decision. Bayesian decision theory chooses the
+      action that minimises posterior expected loss.
+  note: >-
+    Decision science defines a decision as “an irrevocable allocation of resources”
+    (Field and Darling 2022, p. 8), which is why an ML prediction alone is not
+    a decision. Classical decision theory treats the probabilities of the states
+    of nature as known; Field and Darling extend it to probabilities estimated
+    by an ML model, which are themselves uncertain.
+  related:
+  - loss-function
+  - cost-sensitive-learning
+  - minimum-prediction-deviation
+  - uncertainty-quantification
 - key: deep-learning
   term: Deep Learning
   alias: DL
@@ -92,6 +148,26 @@ terms:
   related:
   - deep-learning
   - retrieval-augmented-generation
+- key: extrapolation-error
+  term: Extrapolation Error
+  definitions:
+  - source: field-darling-2022
+    at: §3.1.1, p. 14
+    text: >-
+      Uncertainty in a prediction for an instance “far” from the centroid of the
+      training instances. The trained model then extrapolates, and its accuracy
+      in that region of the feature space is unknown. Distance from the training
+      data can be quantified with the local outlier factor.
+  - source: hullermeier-2021
+    text: >-
+      A form of *epistemic* uncertainty: a model has little knowledge about regions
+      of the input space where there is little or no training data, so its predictions
+      there are less trustworthy even when they appear confident.
+  related:
+  - local-outlier-factor
+  - distribution-shift
+  - minimum-prediction-deviation
+  - solution-uncertainty
 - key: featurization
   term: Featurization
   alias: input regularization, feature engineering
@@ -114,11 +190,22 @@ terms:
     text: >-
       *Feature engineering*: extracting features from raw data and transforming
       them into formats suitable for a machine learning model.
+  - source: field-darling-2022
+    at: §3.1.2, p. 15
+    text: >-
+      Treated under *feature selection* as a source of uncertainty from the model.
+      There is in general no formal way to select or design features that guarantees
+      the true label function can be learned, and feature sets can be non-unique:
+      a model can perform identically under two or more feature sets that still
+      give different predictions for a new instance.
   note: >-
     Stracuzzi et al. (2017) call this step *regularization*, and Darling (2019)
     calls it *input regularization*. This dictionary uses featurization to avoid
     confusion with regularization in the sense of penalty terms or priors, which
-    constrain model fitting and belong to model induction.
+    constrain model fitting and belong to model induction. Field and Darling (2022)
+    split this ground differently: errors in pre-processing count as uncertainty
+    from the data, alongside measurement error, while the choice of features counts
+    as uncertainty from the model.
   related:
   - measurement-error
   - model-form-uncertainty
@@ -239,6 +326,28 @@ terms:
   - uncertainty-quantification
   - model-form-uncertainty
   - solution-uncertainty
+- key: local-outlier-factor
+  term: Local Outlier Factor
+  alias: LOF
+  definitions:
+  - source: breunig-2000
+    text: >-
+      A degree of being an outlier assigned to each object, based on how isolated
+      it is relative to its local neighbourhood: the ratio of the local density
+      of its neighbours to its own local reachability density. Objects deep inside
+      a cluster have an LOF close to 1.
+  - source: field-darling-2022
+    at: §3.3.2, §3.4, pp. 23–24
+    text: >-
+      An unsupervised anomaly detection method that computes the local density
+      deviation of a data point with respect to its neighbours. Used to quantify
+      extrapolation error: an instance with an LOF significantly larger than 1
+      relative to the training set is an outlier, and a decision maker does not
+      trust the model to predict it if its LOF exceeds a threshold $t_{\mathrm{LOF}}$.
+  related:
+  - extrapolation-error
+  - minimum-prediction-deviation
+  - distribution-shift
 - key: loss-function
   term: Loss Function
   alias: cost function, objective
@@ -258,9 +367,24 @@ terms:
     text: >-
       In reinforcement learning, the role of the loss is played by a *reward signal*
       to be maximised rather than an error to be minimised.
+  - source: field-darling-2022
+    at: §2.1.1, p. 11
+    text: >-
+      In decision theory, a function $L: \mathcal{A} \times \mathcal{C} \to [0,
+      \infty)$ giving the consequence of taking each action under each state of
+      nature, here the true class. One form is the cost of the action plus a penalty
+      for taking it when the true label is a given class, as in a table of losses
+      for allowing or blocking a benign or malicious URL.
   related:
   - gradient-descent
   - alignment
+  - decision-theory
+  - cost-sensitive-learning
+  note: >-
+    The term has two related senses. In training, a loss measures how far a model’s
+    outputs are from the targets and is minimised to fit the model. In decision
+    theory, a loss measures the consequences of an action given the true state
+    of the world, and the action with the smallest expected loss is chosen.
 - key: machine-learning
   term: Machine Learning
   alias: ML
@@ -321,6 +445,13 @@ terms:
       Distinguished from *measurement uncertainty*: a parameter, associated with
       the result of a measurement, that characterises the dispersion of the values
       that could reasonably be attributed to the quantity being measured.
+  - source: field-darling-2022
+    at: §3.1.1, p. 13
+    text: >-
+      Grouped with *pre-processing error* as a source of uncertainty from the
+      data: errors in pre-processing, such as improper filtering, and training
+      instances or labels that are missing or corrupted with noise, whether by
+      accident or by an adversary.
   note: >-
     Metrology separates the error of a single result, which is unknowable, from
     the uncertainty that characterises the plausible range of values. In machine
@@ -361,9 +492,21 @@ terms:
       mass $P(B(x, D))$ of the data within a ball of radius $D$ around $x$, to
       place less emphasis on low-density regions, or by its complement, to place
       more emphasis on them, as in anomaly detection.
+  - source: field-darling-2022
+    at: §3.3.1, §3.4, pp. 20–24
+    text: >-
+      Generalised to $\kappa \ge 2$ classes as $\mathrm{MPD}(x' \mid T) = \min_{i}
+      \left(E[(1 - Q_i(x'))^2]\right)^{1/2}$, where $Q_i(x')$ is the random probability
+      that a classifier trained on data $T$ assigns to class $C_i$, sampled for
+      example by bootstrap. It takes values in $[0, 1]$: 0 when the model predicts
+      one class with probability one, and at most $\sqrt{(\kappa-1)/\kappa}$,
+      when the probability mass is split equally among the $\kappa$ single-class
+      predictions. A decision maker sets a threshold $t_{\mathrm{MPD}}$ and does
+      not trust the model to predict an instance whose MPD exceeds it.
   note: >-
-    MPD was introduced by Darling (2019), so all three definitions come from that
-    source. Unlike the standard deviation or a confidence interval, it measures
+    MPD was introduced by Darling (2019) for two classes; Field and Darling (2022)
+    generalise it to any number of classes, and for two classes the definitions
+    agree. Unlike the standard deviation or a confidence interval, it measures
     the deviation of the probability estimates from the class extremes rather
     than from their mean. It therefore separates distributions with the same mean
     that are tightly clustered, bimodal, or spread out. For a consistent learning
@@ -376,6 +519,8 @@ terms:
   - solution-uncertainty
   - model-form-uncertainty
   - reliability
+  - local-outlier-factor
+  - decision-theory
 - key: model
   term: Model
   alias: ML model
@@ -425,6 +570,15 @@ terms:
       Uncertainty due to the assumptions and approximations made in formulating
       a model. It is estimated by comparing model predictions with experimental
       data during validation, and extrapolated to conditions where no data exist.
+  - source: field-darling-2022
+    at: §3.1.2, p. 14
+    text: >-
+      Uncertainty from the choice among classification algorithms, such as decision
+      trees and linear classifiers, and their parameter settings, such as the
+      maximum depth of a tree: different models trained on identical data may
+      yield different predictions for the same instance. It can be ignored only
+      if the predicted class stays the same across algorithms and a wide range
+      of parameter values, which is rarely true.
   note: >-
     In physics-based modelling, model-form uncertainty comes from simplifications
     of the governing equations. In machine learning it comes from the learning
@@ -780,7 +934,10 @@ terms:
     and error describes differences between predicted outcomes and actual observations”
     (Darling 2019, p. 12). And it is distinct from accuracy-based performance
     metrics such as ROC curves, which do not capture the variability in a model’s
-    output.
+    output. Field and Darling (2022) group the sources differently, into uncertainty
+    from the data (pre-processing and measurement error, limited training data,
+    and extrapolation error) and uncertainty from the model (model-form uncertainty
+    and feature selection).
   related:
   - measurement-error
   - featurization
@@ -790,6 +947,8 @@ terms:
   - reliability
   - validity
   - minimum-prediction-deviation
+  - extrapolation-error
+  - decision-theory
 - key: unsupervised-learning
   term: Unsupervised Learning
   definitions:
