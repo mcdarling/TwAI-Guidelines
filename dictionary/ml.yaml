@@ -487,6 +487,12 @@ terms:
       with the goals of accounting for all sources of uncertainty and quantifying
       how much specific sources contribute to the overall uncertainty. It is one
       of three pillars of model credibility, with verification and validation.
+  - source: sullivan-2015
+    text: >-
+      In computational science, the study of two kinds of problem. *Forward* problems
+      propagate uncertainty in a model’s inputs and parameters through the model
+      to its outputs. *Inverse* problems infer uncertain parameters, or the model
+      itself, from observed data, typically in a Bayesian framework.
   - source: abdar-2021
     text: >-
       Methods that estimate how much confidence to place in a machine learning
@@ -507,11 +513,16 @@ terms:
       of the values that could reasonably be attributed to the quantity being
       measured.
   note: >-
-    Scientific computing treats UQ as part of establishing that a model is credible
-    for a decision. Machine learning focuses on per-prediction confidence, often
-    together with *calibration*: whether predicted probabilities match observed
-    frequencies. Both support NIST’s “knowledge limits” principle, under which
-    a system should recognise when its outputs are unreliable.
+    UQ means something different for physics-based and machine learning models.
+    In a physics-based model, such as a simulation governed by partial differential
+    equations, the structure comes from known laws: forward UQ propagates uncertain
+    inputs and parameters to the outputs, and inverse UQ calibrates the parameters
+    against data. A machine learning model has no governing equations and is learned
+    entirely from data, so training is itself the inverse problem. ML UQ asks
+    how far to trust each prediction given the data the model has seen. Epistemic
+    uncertainty grows for inputs unlike the training data, and the question is
+    often paired with *calibration*, whether predicted probabilities match observed
+    frequencies. Check which sense a document means before comparing UQ results.
   related:
   - reliability
   - validity
