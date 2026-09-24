@@ -477,6 +477,46 @@ terms:
   - large-language-model
   - neural-network
   - deep-learning
+- key: uncertainty-quantification
+  term: Uncertainty Quantification
+  alias: UQ
+  definitions:
+  - source: nasem-2012
+    text: >-
+      The process of quantifying uncertainties in a computed quantity of interest,
+      with the goals of accounting for all sources of uncertainty and quantifying
+      how much specific sources contribute to the overall uncertainty. It is one
+      of three pillars of model credibility, with verification and validation.
+  - source: abdar-2021
+    text: >-
+      Methods that estimate how much confidence to place in a machine learning
+      model’s predictions, such as Bayesian neural networks, Monte Carlo dropout,
+      and deep ensembles, so that uncertainty can be accounted for in optimisation
+      and decision-making.
+  - source: hullermeier-2021
+    text: >-
+      Estimating and separating two kinds of predictive uncertainty. *Aleatoric*
+      uncertainty comes from inherent randomness in the data and cannot be reduced.
+      *Epistemic* uncertainty comes from the model’s lack of knowledge and can
+      in principle be reduced with more data.
+  - source: jcgm-100
+    at: §2.2.3
+    text: >-
+      Builds on the metrological concept of *measurement uncertainty*: a parameter,
+      associated with the result of a measurement, that characterises the dispersion
+      of the values that could reasonably be attributed to the quantity being
+      measured.
+  note: >-
+    Scientific computing treats UQ as part of establishing that a model is credible
+    for a decision. Machine learning focuses on per-prediction confidence, often
+    together with *calibration*: whether predicted probabilities match observed
+    frequencies. Both support NIST’s “knowledge limits” principle, under which
+    a system should recognise when its outputs are unreliable.
+  related:
+  - reliability
+  - validity
+  - robustness
+  - distribution-shift
 - key: unsupervised-learning
   term: Unsupervised Learning
   definitions:

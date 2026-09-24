@@ -34,6 +34,8 @@ BODIES = [
     ('ieee-', 'IEEE'),
     ('unesco-', 'UNESCO'),
     ('coe-', 'Council of Europe'),
+    ('nasem-', 'National Academies'),
+    ('jcgm-', 'JCGM'),
     ('owasp-', 'OWASP'),
 ]
 ACADEMIC = 'Academic'

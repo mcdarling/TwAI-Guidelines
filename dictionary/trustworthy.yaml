@@ -511,6 +511,7 @@ terms:
   - validity
   - robustness
   - distribution-shift
+  - uncertainty-quantification
 - key: resilience
   term: Resilience
   definitions:
@@ -564,6 +565,7 @@ terms:
   - validity
   - reliability
   - distribution-shift
+  - uncertainty-quantification
 - key: safety
   term: Safety
   alias: AI safety
@@ -715,3 +717,4 @@ terms:
   - reliability
   - validation-data
   - trustworthy-ai
+  - uncertainty-quantification
