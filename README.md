@@ -44,9 +44,34 @@ make site       # website only, in docs/_build/html
 make distclean  # remove all build output
 ```
 
-On every pull request, GitHub Actions builds both forms. On `main`, it also
-publishes the site to GitHub Pages. To enable publishing, set
-**Settings → Pages → Build and deployment → Source** to **GitHub Actions**.
+### Hosting on GitHub and GitLab
+
+The same repository builds and publishes on both hosts with no changes:
+
+| | GitHub | GitLab |
+| --- | --- | --- |
+| CI file | `.github/workflows/build.yml` | `.gitlab-ci.yml` |
+| Pull or merge requests | Build the PDF and site | Build the PDF and site |
+| Default branch | Also publishes to GitHub Pages | Also publishes to GitLab Pages |
+| One-time setup | **Settings → Pages → Source**: *GitHub Actions* | GitLab Pages enabled for the instance |
+
+Each host ignores the other's CI file. The site's "view" and "edit" links
+point at whichever host built it, and pages generated from the YAML link to
+the YAML file itself.
+
+To work on GitHub and publish internally, add the GitLab repository as a
+second remote once, then push to it whenever you want to update the internal
+site:
+
+```sh
+git remote add internal https://gitlab.example.org/group/twai-guidelines.git
+git pull origin main          # get the latest from GitHub
+git push internal main        # GitLab builds and publishes it
+```
+
+If the internal network cannot reach Docker Hub or PyPI, set the GitLab CI/CD
+variables `TEX_IMAGE` (a TeX Live image with `latexmk` and `biber`) and
+`PIP_INDEX_URL` (a Python package index) to internal mirrors.
 
 ### Adding or editing a term
 
