@@ -104,11 +104,12 @@ terms:
       are a source of uncertainty in the ML pipeline: preprocessing that removes
       irrelevant signals may also alter the information of interest.
   - source: darling-2019
+    at: p. 11
     text: >-
-      Termed *input regularization*: the step in the machine learning pipeline
-      between the indirect observations and statistical model induction. Its *regularization
-      effects* are one of the sources that combine into the solution uncertainty
-      of a prediction.
+      Termed *input regularization*: the step that processes the indirect observations
+      before statistical model induction (Fig. 2.5b). How the data is processed
+      can lead to biases, which may or may not be desirable, and its *regularization
+      effects* are one source of solution uncertainty.
   - source: zheng-casari-2018
     text: >-
       *Feature engineering*: extracting features from raw data and transforming
@@ -222,6 +223,12 @@ terms:
       Error introduced when inference procedures map examples through the learned
       model into output values. Depending on the model, inference may only be
       approximate.
+  - source: darling-2019
+    at: pp. 11–12
+    text: >-
+      Uncertainty from the approximate inference step that maps the induced model
+      to the unobservable inferred state (Fig. 2.5d). Some models require sampling
+      to make inferences.
   - source: blei-2017
     text: >-
       In Bayesian models, the error introduced by approximating an intractable
@@ -296,6 +303,12 @@ terms:
       The first source of uncertainty in the ML pipeline: error in the observations
       themselves. For a seismograph, it arises from calibration, from vibrations
       with non-seismic sources such as wind, and from limited sensor sensitivity.
+  - source: darling-2019
+    at: p. 11
+    text: >-
+      Uncertainty introduced by data collection, together with questions of data
+      sufficiency: which data, and how much, should be collected, and how long
+      before it must be recollected.
   - source: jcgm-100
     at: §B.2.19
     text: >-
@@ -351,6 +364,12 @@ terms:
     text: >-
       Model-form uncertainty arises from the learning process: many plausible
       model parameterizations exist and each provides a slightly different output.
+  - source: darling-2019
+    at: p. 11
+    quote: true
+    text: >-
+      The choice of learning algorithm and the parameterization of the subsequent
+      model is a source of variability.
   - source: kennedy-ohagan-2001
     text: >-
       Termed *model inadequacy*: the difference between the true process and a
@@ -366,7 +385,10 @@ terms:
     of the governing equations. In machine learning it comes from the learning
     process itself: model induction is ill-posed, so different samples of the
     training data, or different classes of model, give different but equally plausible
-    models.
+    models. In the pipeline figure of Darling (2019), two inputs feed statistical
+    model induction: the *model structure*, such as the learning algorithm and
+    its form, and the *model fit criteria*, such as the loss and any regularization
+    penalty.
   related:
   - uncertainty-quantification
   - featurization
@@ -444,7 +466,8 @@ terms:
     Not to be confused with *input regularization*, the featurization step of
     the ML pipeline in uncertainty quantification. Regularization in the sense
     used here, penalty terms or priors that constrain how a model is fitted, is
-    part of model induction, where it contributes to model-form uncertainty.
+    part of model induction, as one of the model fit criteria in Darling’s (2019)
+    pipeline, where it contributes to model-form uncertainty.
 - key: reinforcement-learning
   term: Reinforcement Learning
   alias: RL
@@ -521,6 +544,12 @@ terms:
       The uncertainty in a model’s prediction for an unobservable state. It combines
       the uncertainties from every step of the ML pipeline: measurement errors,
       regularization effects, model-form uncertainty, and inference errors.
+  - source: darling-2019
+    at: p. 11, Fig. 2.5
+    quote: true
+    text: >-
+      The solution uncertainty is the union of uncertainties associated with measurements,
+      regularization, model-form, and inference.
   - source: hullermeier-2021
     text: >-
       The *total* uncertainty of a prediction, made up of aleatoric uncertainty,
@@ -531,9 +560,13 @@ terms:
       The overall uncertainty in a computed quantity of interest, to which UQ
       attributes the contributions of the individual sources of uncertainty.
   note: >-
-    Stracuzzi et al. argue that the full distribution over possible outputs matters,
-    not just a confidence interval, because two distributions with the same variance
-    can have very different shapes, for example one bimodal and one unimodal.
+    Darling (2019) adds a fifth consideration at the end of the pipeline, interpretation
+    and decision making: “The model’s interface is also a source of uncertainty:
+    the presentation of the outcome can influence a user’s perception of its meaning
+    or validity” (p. 12). Stracuzzi et al. argue that the full distribution over
+    possible outputs matters, not just a confidence interval, because two distributions
+    with the same variance can have very different shapes, for example one bimodal
+    and one unimodal.
   related:
   - uncertainty-quantification
   - measurement-error
@@ -655,6 +688,12 @@ terms:
       If machine learning establishes relationships between observable and unobservable
       variables, then uncertainty quantification characterizes the variability
       in those relationships.
+  - source: darling-2019
+    at: p. 3
+    text: >-
+      Characterising the uncertainty in a supervised model’s predictions, for
+      each individual input, in order to quantify the degree to which the end
+      user can have confidence in those predictions.
   - source: nasem-2012
     text: >-
       The process of quantifying uncertainties in a computed quantity of interest,
@@ -689,12 +728,14 @@ terms:
     enters at each step of the ML pipeline: measurement error in the observations,
     regularization effects from featurization of the inputs, model-form uncertainty
     from learning, and inference error when the model produces outputs. Together
-    these make up the solution uncertainty of a prediction. UQ is also distinct
-    from probability: “probability measures the likelihood or belief in an inferred
-    outcome, while uncertainty characterizes the range of possible outcomes or
-    beliefs due to imperfect information” (Stracuzzi et al. 2017, p. 12). And
-    it is distinct from accuracy-based performance metrics such as ROC curves,
-    which do not capture the variability in a model’s output.
+    these make up the solution uncertainty of the inferred state, which people
+    then interpret to make decisions. Uncertainty is also distinct from probability
+    and error: “Given a fixed model, probability measures the likelihood or belief
+    in an inferred outcome, uncertainty characterizes the variability in outcomes,
+    and error describes differences between predicted outcomes and actual observations”
+    (Darling 2019, p. 12). And it is distinct from accuracy-based performance
+    metrics such as ROC curves, which do not capture the variability in a model’s
+    output.
   related:
   - measurement-error
   - featurization
