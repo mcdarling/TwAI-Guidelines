@@ -50,7 +50,8 @@ terms:
   related:
   - robustness
   - data-poisoning
-  - security-resilience
+  - security
+  - resilience
 - key: ai-governance
   term: AI Governance
   definitions:
@@ -183,7 +184,9 @@ terms:
     is intended.
   related:
   - fairness
-  - datasets
+  - training-data
+  - validation-data
+  - test-data
 - key: data-poisoning
   term: Data Poisoning
   definitions:
@@ -204,8 +207,37 @@ terms:
       security, performance, or ethical behaviour.
   related:
   - adversarial-example
-  - security-resilience
-  - datasets
+  - security
+  - resilience
+  - training-data
+  - validation-data
+  - test-data
+- key: datasheet
+  term: Datasheet for Datasets
+  alias: datasheet
+  definitions:
+  - source: gebru-2021
+    text: >-
+      A document accompanying a dataset that records its motivation, composition,
+      collection process, preprocessing and labelling, uses, distribution, and
+      maintenance, so that dataset creators reflect on their choices and dataset
+      consumers can decide whether it suits their task.
+  - source: bender-friedman-2018
+    text: >-
+      Called a *data statement* in natural language processing: documentation
+      of a dataset’s speakers, annotators, language varieties, and curation rationale,
+      so that readers can judge whose language a model trained on it represents.
+  - source: eu-ai-act
+    at: Art. 10
+    text: >-
+      Related regulatory concept: data governance for high-risk AI systems must
+      cover data collection processes, data origin, preparation operations, assumptions,
+      and the examination of possible biases.
+  related:
+  - model-card
+  - bias
+  - training-data
+  - transparency
 - key: differential-privacy
   term: Differential Privacy
   alias: DP
@@ -360,18 +392,17 @@ terms:
   - transparency
 - key: model-card
   term: Model Card
-  alias: datasheet
   definitions:
   - source: mitchell-2019
     text: >-
       A short document accompanying a trained model that gives benchmarked evaluation
       across relevant conditions, such as demographic groups, as well as intended
       use, out-of-scope uses, evaluation procedures, and ethical considerations.
-  - source: gebru-2021
+  - source: nist-ai-rmf
     text: >-
-      The companion practice for data, called a *datasheet for datasets*. It documents
-      a dataset's motivation, composition, collection process, preprocessing,
-      uses, distribution, and maintenance.
+      Documentation of an AI system’s intended purposes, limitations, and known
+      risks is part of the MAP and GOVERN functions and supports transparency
+      and accountability.
   - source: eu-ai-act
     at: Art. 11
     text: >-
@@ -379,9 +410,9 @@ terms:
       of high-risk AI systems must draw up before placing them on the market and
       keep up to date.
   related:
+  - datasheet
   - transparency
   - auditability
-  - datasets
 - key: privacy
   term: Privacy
   alias: privacy-enhanced AI
@@ -405,7 +436,8 @@ terms:
       or the model.
   related:
   - differential-privacy
-  - security-resilience
+  - security
+  - resilience
 - key: prompt-injection
   term: Prompt Injection
   definitions:
@@ -433,7 +465,8 @@ terms:
   - prompt
   - agentic-ai
   - retrieval-augmented-generation
-  - security-resilience
+  - security
+  - resilience
 - key: red-teaming
   term: Red Teaming
   definitions:
@@ -456,7 +489,54 @@ terms:
   related:
   - ai-risk
   - safety
-  - security-resilience
+  - security
+  - resilience
+- key: reliability
+  term: Reliability
+  definitions:
+  - source: nist-ai-rmf
+    at: §3.1
+    text: >-
+      The ability of an item to perform as required, without failure, for a given
+      time interval under given conditions.
+  - source: iso-22989
+    text: The property of consistent intended behaviour and results.
+  - source: hleg-2019
+    text: >-
+      Part of technical robustness: a reliable system works properly with a range
+      of inputs and in a range of situations. *Reproducibility*, obtaining the
+      same behaviour when an experiment is repeated under the same conditions,
+      is a related requirement.
+  related:
+  - validity
+  - robustness
+  - distribution-shift
+- key: resilience
+  term: Resilience
+  definitions:
+  - source: nist-ai-rmf
+    at: §3.3
+    text: >-
+      An AI system is resilient if it can withstand unexpected adverse events
+      or unexpected changes in its environment or use, or if it can maintain its
+      functions and structure in the face of internal and external change and
+      degrade safely and gracefully when necessary.
+  - source: eu-ai-act
+    at: Art. 15
+    text: >-
+      High-risk AI systems shall be as resilient as possible regarding errors,
+      faults, or inconsistencies that may occur within the system or its environment,
+      for example through technical redundancy, including backup or fail-safe
+      plans.
+  - source: hleg-2019
+    text: >-
+      Part of technical robustness and safety: AI systems are resilient to attacks
+      and have fall-back plans that allow them to continue operating safely, or
+      to ask for a human operator, when problems arise.
+  related:
+  - security
+  - robustness
+  - safety
 - key: robustness
   term: Robustness
   definitions:
@@ -481,7 +561,8 @@ terms:
       an allowed set, formalised as a min–max (saddle-point) optimisation problem.
   related:
   - adversarial-example
-  - validity-reliability
+  - validity
+  - reliability
   - distribution-shift
 - key: safety
   term: Safety
@@ -510,33 +591,35 @@ terms:
   - alignment
   - ai-risk
   - robustness
-- key: security-resilience
-  term: Security and Resilience
+- key: security
+  term: Security
   definitions:
   - source: nist-ai-rmf
     at: §3.3
     text: >-
-      An AI system is *resilient* if it can withstand unexpected adverse events
-      or changes in its environment or use, or degrade safely and gracefully.
-      It is *secure* if it maintains confidentiality, integrity, and availability
-      through mechanisms that prevent unauthorised access and use.
+      An AI system is secure if it maintains confidentiality, integrity, and availability
+      through protection mechanisms that prevent unauthorised access and use.
   - source: eu-ai-act
-    at: Art. 15
+    at: Art. 15
     text: >-
       Cybersecurity: high-risk AI systems shall be resilient against attempts
       by unauthorised third parties to alter their use, outputs, or performance
-      by exploiting vulnerabilities. Examples include data poisoning, model poisoning,
-      adversarial examples, and confidentiality attacks.
+      by exploiting vulnerabilities. AI-specific examples include data poisoning,
+      model poisoning, adversarial examples, and confidentiality attacks.
   - source: nist-ai-100-2
     text: >-
-      Adversarial machine learning classifies attacks by the attacker's goals
-      (availability, integrity, privacy, and misuse), capabilities, knowledge,
-      and the stage of the ML lifecycle they target.
+      In adversarial machine learning, attacks are classified by the attacker’s
+      goals (availability, integrity, privacy, and misuse), their capabilities
+      and knowledge, and the stage of the ML lifecycle they target.
+  note: >-
+    NIST separates security (protection against attack) from resilience (recovery
+    from adverse events of any cause). The EU AI Act groups cybersecurity with
+    accuracy and robustness in Article 15.
   related:
+  - resilience
   - adversarial-example
   - data-poisoning
   - prompt-injection
-  - robustness
 - key: transparency
   term: Transparency
   definitions:
@@ -608,30 +691,27 @@ terms:
   - robustness
   - safety
   - transparency
-  - validity-reliability
-- key: validity-reliability
-  term: Validity and Reliability
+  - validity
+  - reliability
+- key: validity
+  term: Validity
   definitions:
   - source: nist-ai-rmf
     at: §3.1
     text: >-
       *Validation* is confirmation, through objective evidence, that the requirements
-      for a specific intended use have been fulfilled. *Reliability* is the ability
-      of an item to perform as required, without failure, for a given time interval
-      under given conditions. Accuracy and robustness contribute to both.
-  - source: iso-22989
+      for a specific intended use or application have been fulfilled. NIST treats
+      validity and reliability together as the foundation of trustworthiness.
+  - source: jacobs-wallach-2021
     text: >-
-      Reliability is the property of consistent intended behaviour and results.
-  - source: hleg-2019
-    text: >-
-      Part of technical robustness: a reliable system works properly across a
-      range of inputs and situations, and reproducibility means it behaves the
-      same way when an experiment is repeated under the same conditions.
+      In measurement, the extent to which a measurement model actually captures
+      the unobservable construct it is meant to measure, such as “creditworthiness”
+      or “risk”. It includes construct validity and content validity.
   note: >-
-    NIST treats validity and reliability as the foundation of trustworthiness.
-    A system that is not valid for its context cannot be made trustworthy by adding
-    the other characteristics.
+    NIST’s definition concerns whether a system meets requirements for its intended
+    use. The measurement definition concerns whether the quantities a system predicts
+    or is evaluated on mean what they claim to mean.
   related:
-  - robustness
+  - reliability
+  - validation-data
   - trustworthy-ai
-  - distribution-shift
