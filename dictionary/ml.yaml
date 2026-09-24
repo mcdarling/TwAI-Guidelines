@@ -1,6 +1,25 @@
 # Machine Learning terms, in alphabetical order.
 domain: Machine Learning
 terms:
+- key: concept-drift
+  term: Concept Drift
+  definitions:
+  - source: gama-2014
+    text: >-
+      A change over time in the relationship between input data and the target
+      variable, which makes a model learned on past data less accurate.
+  - source: widmer-kubat-1996
+    text: >-
+      A change in the target concept being learned, often caused by hidden context
+      that the features do not capture, which requires the learner to detect the
+      change and adapt.
+  - source: moreno-torres-2012
+    text: >-
+      Termed *concept shift*: a change in the conditional distribution of outputs
+      given inputs, while the input distribution may stay the same.
+  related:
+  - distribution-shift
+  - reliability
 - key: deep-learning
   term: Deep Learning
   alias: DL
@@ -26,7 +45,7 @@ terms:
   - transformer
 - key: distribution-shift
   term: Distribution Shift
-  alias: dataset shift, drift
+  alias: dataset shift
   definitions:
   - source: quinonero-2009
     text: >-
@@ -34,23 +53,25 @@ terms:
       between the training and test (or deployment) stages. Special cases include
       covariate shift, where input distributions change, and prior probability
       shift.
-  - source: gama-2014
+  - source: moreno-torres-2012
     text: >-
-      *Concept drift*: a change over time in the relationship between input data
-      and the target variable, which makes a model learned on past data less accurate.
+      Any situation in which training and test distributions differ. The main
+      types are covariate shift (the input distribution changes), prior probability
+      shift (the class distribution changes), and concept shift (the relationship
+      between inputs and outputs changes).
   - source: nist-ai-rmf
     text: >-
       A risk specific to AI: data used to build a system may not represent the
       context of use, and the conditions of deployment may change, so that performance
       and trustworthiness degrade after deployment.
   note: >-
-    “Data drift” usually means a change in the input distribution. “Concept drift”
-    means a change in the input–output relationship. Both motivate post-deployment
-    monitoring.
+    Distribution shift is the umbrella term. Concept drift, a change in the input–output
+    relationship over time, is one kind of shift and has its own entry.
   related:
+  - concept-drift
   - generalization
   - robustness
-  - validity-reliability
+  - reliability
 - key: embedding
   term: Embedding
   definitions:
@@ -116,7 +137,9 @@ terms:
   related:
   - overfitting
   - distribution-shift
-  - datasets
+  - training-data
+  - validation-data
+  - test-data
 - key: gradient-descent
   term: Gradient Descent
   definitions:
@@ -155,7 +178,9 @@ terms:
       a parameter fitted directly to the data. Examples are regularisation coefficients
       and the number of basis functions.
   related:
-  - datasets
+  - training-data
+  - validation-data
+  - test-data
   - model
 - key: loss-function
   term: Loss Function
@@ -279,7 +304,9 @@ terms:
       data, giving small training error but poor predictions on new inputs.
   related:
   - generalization
-  - datasets
+  - training-data
+  - validation-data
+  - test-data
 - key: reinforcement-learning
   term: Reinforcement Learning
   alias: RL
@@ -364,37 +391,50 @@ terms:
   related:
   - unsupervised-learning
   - self-supervised-learning
-  - datasets
-- key: datasets
-  term: Training, Validation, and Test Data
+  - training-data
+  - validation-data
+  - test-data
+- key: test-data
+  term: Test Data
+  alias: testing data
   definitions:
-  - source: iso-22989
+  - source: eu-ai-act
+    at: Art. 3(32)
     text: >-
-      *Training data* are samples used to train a machine learning model. *Validation
-      data* are samples used to tune hyperparameters or compare candidate models.
-      *Test data* are samples, independent of the training data, used to assess
-      the performance of the final model.
+      Data used for providing an independent evaluation of the AI system, to confirm
+      its expected performance before it is placed on the market or put into service.
   - source: hastie-2009
     at: §7.2
     text: >-
-      In a data-rich setting, the data are divided into three parts. The training
-      set fits the models, the validation set estimates prediction error for model
-      selection, and the test set assesses the generalisation error of the chosen
-      model. The test set should be kept “in a vault” until the end.
+      A set used only to assess the generalisation error of the finally chosen
+      model. It should be kept “in a vault” and used only at the end of the analysis.
   - source: goodfellow-2016
     at: §5.3
     text: >-
-      The test set estimates generalisation error and must not influence model
-      choices. A validation set, held out from the training data, is used to set
-      hyperparameters.
-  note: >-
-    In some communities, especially medicine, “validation” means *external* evaluation
-    on new data, which is close to what ML calls testing. Check which meaning
-    a document uses.
+      Examples used to estimate generalisation error. They must not be used to
+      make any choices about the model, including its hyperparameters.
   related:
+  - training-data
+  - validation-data
   - generalization
+- key: training-data
+  term: Training Data
+  definitions:
+  - source: iso-22989
+    text: Data samples used to train a machine learning model.
+  - source: eu-ai-act
+    at: Art. 3(29)
+    text: >-
+      Data used for training an AI system through fitting its learnable parameters.
+  - source: hastie-2009
+    at: §7.2
+    text: >-
+      The part of the data used to fit the models, as distinct from the validation
+      and test sets.
+  related:
+  - validation-data
+  - test-data
   - overfitting
-  - hyperparameter
 - key: transfer-learning
   term: Transfer Learning
   definitions:
@@ -456,3 +496,31 @@ terms:
   related:
   - supervised-learning
   - self-supervised-learning
+- key: validation-data
+  term: Validation Data
+  definitions:
+  - source: eu-ai-act
+    at: Art. 3(30)
+    text: >-
+      Data used for evaluating the trained AI system and for tuning its non-learnable
+      parameters and its learning process, among other things to prevent underfitting
+      or overfitting.
+  - source: hastie-2009
+    at: §7.2
+    text: >-
+      A held-out set used to estimate prediction error for *model selection*:
+      choosing between candidate models or model complexities.
+  - source: goodfellow-2016
+    at: §5.3
+    text: >-
+      Examples held out from the training data, which the training algorithm does
+      not observe, used to set hyperparameters.
+  note: >-
+    In some fields, especially medicine, “validation” means *external* evaluation
+    on new data, which is close to what machine learning calls testing. Check
+    which meaning a document uses.
+  related:
+  - training-data
+  - test-data
+  - hyperparameter
+  - validity

@@ -286,7 +286,8 @@ terms:
   related:
   - large-language-model
   - retrieval-augmented-generation
-  - validity-reliability
+  - validity
+  - reliability
 - key: large-language-model
   term: Large Language Model
   alias: LLM
