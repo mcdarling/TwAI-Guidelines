@@ -1,0 +1,26 @@
+# Useful notes: guidance and context that spans several terms.
+# Each note has a key, a subject, a source (a key in references.bib), an
+# optional location, quote: true when the text is copied exactly from the
+# source, the text (blank lines separate paragraphs), and related term keys.
+notes:
+- key: transparency-explainability-interpretability
+  subject: Relationship between Transparency, Explainability, and Interpretability
+  source: nist-ai-rmf
+  at: §3.5
+  quote: true
+  text: >-
+    Transparency can answer the question of “what happened” in the system.
+    Explainability can answer the question of “how” a decision was made in the
+    system. Interpretability can answer the question of “why” a decision was
+    made by the system and its meaning or context to the user.
+  related: [transparency, explainability, interpretability]
+- key: fairness-without-harmful-bias
+  subject: Fairness in the Absence of Harmful Bias
+  source: nist-ai-rmf
+  at: §3.7
+  quote: true
+  text: |-
+    Systems in which harmful biases are mitigated are not necessarily fair. For example, systems in which predictions are somewhat balanced across demographic groups may still be inaccessible to individuals with disabilities or affected by the digital divide or may exacerbate existing disparities or systemic biases.
+
+    Bias is broader than demographic balance and data representativeness. NIST has identified three major categories of AI bias to be considered and managed: systemic, computational and statistical, and human-cognitive. Each of these can occur in the absence of prejudice, partiality, or discriminatory intent.
+  related: [fairness, bias]

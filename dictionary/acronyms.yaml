@@ -1,0 +1,16 @@
+# Acronyms that are not already a term's alias. Aliases that are acronyms,
+# such as LLM or UQ, are added to the list automatically. `term` is the key
+# of the entry the acronym links to.
+acronyms:
+- acronym: ANN
+  expansion: Artificial Neural Network
+  term: neural-network
+- acronym: DNN
+  expansion: Deep Neural Network
+  term: deep-learning
+- acronym: AI RMF
+  expansion: AI Risk Management Framework (NIST)
+  term: risk-framework
+- acronym: XAI
+  expansion: Explainable AI
+  term: explainability

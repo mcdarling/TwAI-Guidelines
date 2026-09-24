@@ -92,6 +92,42 @@
 
 \newcommand{\note}[1]{\gdef\twai@note{#1}}
 
+% --- Useful notes: guidance spanning several terms.
+% \begin{usefulnote}{<key>}{<subject>} \notetext[*][<at>]{<bibkey>}{<text>}
+%   \related{...} \end{usefulnote}
+\NewDocumentEnvironment{usefulnote}{m m}{%
+  \par\needspace{6\baselineskip}\medskip
+  \noindent
+  \def\@currentlabelname{#2}%
+  \phantomsection\label{note:#1}%
+  \markboth{#2}{#2}%
+  {\large\bfseries\color{twai@term}#2}%
+  \par\nobreak\vspace{2pt}%
+  {\color{twai@rule}\hrule height 0.4pt}%
+  \nobreak\vspace{4pt}%
+  \gdef\twai@seealso{}%
+}{%
+  \ifdefempty{\twai@seealso}{}{%
+    \par\noindent{\small\color{twai@meta}\textit{See also:} \twai@seealso}\par}%
+  \medskip
+}
+% Quoted notes are set as a block quotation; the text may have paragraphs.
+\NewDocumentCommand{\notetext}{s o m +m}{%
+  \IfBooleanTF{#1}{\begin{quote}#4\end{quote}}{\par\noindent #4\par}%
+  \nobreak
+  {\raggedleft\small\color{twai@meta}%
+   \IfBooleanTF{#1}{}{adapted from\ }%
+   \IfValueTF{#2}{\cite[#2]{#3}}{\cite{#3}}\par}%
+}
+
+% --- Acronym list.
+\newenvironment{acronymlist}{%
+  \begin{description}[font=\normalfont\bfseries, labelwidth=4.5em,
+                      leftmargin=5.5em, itemsep=2pt]
+}{%
+  \end{description}%
+}
+
 \newcommand{\xref}[1]{\hyperref[term:#1]{\nameref*{term:#1}}}
 
 \newcommand{\related}[1]{%
