@@ -20,6 +20,62 @@ terms:
   related:
   - distribution-shift
   - reliability
+- key: cost-sensitive-learning
+  term: Cost-Sensitive Learning
+  definitions:
+  - source: elkan-2001
+    text: >-
+      Learning when different kinds of misclassification have different costs,
+      specified by a cost matrix. The optimal prediction for an example is the
+      class that minimises its expected cost, which is not necessarily the most
+      probable class.
+  - source: field-darling-2022
+    at: pp. 7–8
+    text: >-
+      Minimising expected error costs by incorporating the relative costs of different
+      error types and class-imbalance information into training, which averages
+      cost over a population of examples. It contrasts with making decisions that
+      are optimal per instance, using the uncertainty of each individual prediction.
+  related:
+  - decision-theory
+  - loss-function
+  - minimum-prediction-deviation
+- key: decision-theory
+  term: Decision Theory
+  definitions:
+  - source: field-darling-2022
+    at: §2.1.1, p. 10
+    quote: true
+    text: >-
+      A decision problem exists when there is a choice of possible actions to
+      take; the consequence of these actions depends on the (unknown) truth, typically
+      referred to as the “state of nature” in the decision theory literature.
+  - source: field-darling-2022
+    at: §2.1.1, §3.4, pp. 10–25
+    text: >-
+      A decision problem has four ingredients: a collection of possible actions,
+      a collection of possible states of nature, a loss function, and the optimal
+      action, which minimises the expected loss. Under uncertainty in a classifier’s
+      output, the decision is made only if the model can be trusted on the instance,
+      as judged by measures such as minimum prediction deviation and local outlier
+      factor.
+  - source: berger-1985
+    text: >-
+      The study of making decisions in the presence of uncertainty about the state
+      of nature, combining statistical knowledge about that state with the losses
+      incurred by each possible decision. Bayesian decision theory chooses the
+      action that minimises posterior expected loss.
+  note: >-
+    Decision science defines a decision as “an irrevocable allocation of resources”
+    (Field and Darling 2022, p. 8), which is why an ML prediction alone is not
+    a decision. Classical decision theory treats the probabilities of the states
+    of nature as known; Field and Darling extend it to probabilities estimated
+    by an ML model, which are themselves uncertain.
+  related:
+  - loss-function
+  - cost-sensitive-learning
+  - minimum-prediction-deviation
+  - uncertainty-quantification
 - key: deep-learning
   term: Deep Learning
   alias: DL
@@ -92,6 +148,69 @@ terms:
   related:
   - deep-learning
   - retrieval-augmented-generation
+- key: extrapolation-error
+  term: Extrapolation Error
+  definitions:
+  - source: field-darling-2022
+    at: §3.1.1, p. 14
+    text: >-
+      Uncertainty in a prediction for an instance “far” from the centroid of the
+      training instances. The trained model then extrapolates, and its accuracy
+      in that region of the feature space is unknown. Distance from the training
+      data can be quantified with the local outlier factor.
+  - source: hullermeier-2021
+    text: >-
+      A form of *epistemic* uncertainty: a model has little knowledge about regions
+      of the input space where there is little or no training data, so its predictions
+      there are less trustworthy even when they appear confident.
+  related:
+  - local-outlier-factor
+  - distribution-shift
+  - minimum-prediction-deviation
+  - solution-uncertainty
+- key: featurization
+  term: Featurization
+  alias: input regularization, feature engineering
+  definitions:
+  - source: stracuzzi-2017
+    at: pp. 14–15
+    text: >-
+      Preprocessing observations before a model is induced from them, such as
+      applying a low-pass filter to seismic waveforms. Its *regularization effects*
+      are a source of uncertainty in the ML pipeline: preprocessing that removes
+      irrelevant signals may also alter the information of interest.
+  - source: darling-2019
+    at: p. 11
+    text: >-
+      Termed *input regularization*: the step that processes the indirect observations
+      before statistical model induction (Fig. 2.5b). How the data is processed
+      can lead to biases, which may or may not be desirable, and its *regularization
+      effects* are one source of solution uncertainty.
+  - source: zheng-casari-2018
+    text: >-
+      *Feature engineering*: extracting features from raw data and transforming
+      them into formats suitable for a machine learning model.
+  - source: field-darling-2022
+    at: §3.1.2, p. 15
+    text: >-
+      Treated under *feature selection* as a source of uncertainty from the model.
+      There is in general no formal way to select or design features that guarantees
+      the true label function can be learned, and feature sets can be non-unique:
+      a model can perform identically under two or more feature sets that still
+      give different predictions for a new instance.
+  note: >-
+    Stracuzzi et al. (2017) call this step *regularization*, and Darling (2019)
+    calls it *input regularization*. This dictionary uses featurization to avoid
+    confusion with regularization in the sense of penalty terms or priors, which
+    constrain model fitting and belong to model induction. Field and Darling (2022)
+    split this ground differently: errors in pre-processing count as uncertainty
+    from the data, alongside measurement error, while the choice of features counts
+    as uncertainty from the model.
+  related:
+  - measurement-error
+  - model-form-uncertainty
+  - uncertainty-quantification
+  - regularization
 - key: fine-tuning
   term: Fine-Tuning
   definitions:
@@ -182,6 +301,53 @@ terms:
   - validation-data
   - test-data
   - model
+- key: inference-error
+  term: Inference Error
+  definitions:
+  - source: stracuzzi-2017
+    at: p. 14
+    text: >-
+      Error introduced when inference procedures map examples through the learned
+      model into output values. Depending on the model, inference may only be
+      approximate.
+  - source: darling-2019
+    at: pp. 11–12
+    text: >-
+      Uncertainty from the approximate inference step that maps the induced model
+      to the unobservable inferred state (Fig. 2.5d). Some models require sampling
+      to make inferences.
+  - source: blei-2017
+    text: >-
+      In Bayesian models, the error introduced by approximating an intractable
+      posterior, for example with variational inference or Markov chain Monte
+      Carlo. Variational inference in particular tends to underestimate the variance
+      of the posterior.
+  related:
+  - uncertainty-quantification
+  - model-form-uncertainty
+  - solution-uncertainty
+- key: local-outlier-factor
+  term: Local Outlier Factor
+  alias: LOF
+  definitions:
+  - source: breunig-2000
+    text: >-
+      A degree of being an outlier assigned to each object, based on how isolated
+      it is relative to its local neighbourhood: the ratio of the local density
+      of its neighbours to its own local reachability density. Objects deep inside
+      a cluster have an LOF close to 1.
+  - source: field-darling-2022
+    at: §3.3.2, §3.4, pp. 23–24
+    text: >-
+      An unsupervised anomaly detection method that computes the local density
+      deviation of a data point with respect to its neighbours. Used to quantify
+      extrapolation error: an instance with an LOF significantly larger than 1
+      relative to the training set is an outlier, and a decision maker does not
+      trust the model to predict it if its LOF exceeds a threshold $t_{\mathrm{LOF}}$.
+  related:
+  - extrapolation-error
+  - minimum-prediction-deviation
+  - distribution-shift
 - key: loss-function
   term: Loss Function
   alias: cost function, objective
@@ -201,9 +367,24 @@ terms:
     text: >-
       In reinforcement learning, the role of the loss is played by a *reward signal*
       to be maximised rather than an error to be minimised.
+  - source: field-darling-2022
+    at: §2.1.1, p. 11
+    text: >-
+      In decision theory, a function $L: \mathcal{A} \times \mathcal{C} \to [0,
+      \infty)$ giving the consequence of taking each action under each state of
+      nature, here the true class. One form is the cost of the action plus a penalty
+      for taking it when the true label is a given class, as in a table of losses
+      for allowing or blocking a benign or malicious URL.
   related:
   - gradient-descent
   - alignment
+  - decision-theory
+  - cost-sensitive-learning
+  note: >-
+    The term has two related senses. In training, a loss measures how far a model’s
+    outputs are from the targets and is minimised to fit the model. In decision
+    theory, a loss measures the consequences of an action given the true state
+    of the world, and the action with the smallest expected loss is chosen.
 - key: machine-learning
   term: Machine Learning
   alias: ML
@@ -237,6 +418,109 @@ terms:
   - supervised-learning
   - unsupervised-learning
   - reinforcement-learning
+- key: measurement-error
+  term: Measurement Error
+  definitions:
+  - source: stracuzzi-2017
+    at: pp. 14–15
+    text: >-
+      The first source of uncertainty in the ML pipeline: error in the observations
+      themselves. For a seismograph, it arises from calibration, from vibrations
+      with non-seismic sources such as wind, and from limited sensor sensitivity.
+  - source: darling-2019
+    at: p. 11
+    text: >-
+      Uncertainty introduced by data collection, together with questions of data
+      sufficiency: which data, and how much, should be collected, and how long
+      before it must be recollected.
+  - source: jcgm-100
+    at: §B.2.19
+    text: >-
+      The result of a measurement minus the true value of the quantity being measured.
+      Because the true value cannot be known exactly, the error cannot be known
+      exactly either.
+  - source: jcgm-100
+    at: §2.2.3
+    text: >-
+      Distinguished from *measurement uncertainty*: a parameter, associated with
+      the result of a measurement, that characterises the dispersion of the values
+      that could reasonably be attributed to the quantity being measured.
+  - source: field-darling-2022
+    at: §3.1.1, p. 13
+    text: >-
+      Grouped with *pre-processing error* as a source of uncertainty from the
+      data: errors in pre-processing, such as improper filtering, and training
+      instances or labels that are missing or corrupted with noise, whether by
+      accident or by an adversary.
+  note: >-
+    Metrology separates the error of a single result, which is unknowable, from
+    the uncertainty that characterises the plausible range of values. In machine
+    learning, measurement error affects both the training data and the inputs
+    at prediction time.
+  related:
+  - uncertainty-quantification
+  - featurization
+  - solution-uncertainty
+  - training-data
+- key: minimum-prediction-deviation
+  term: Minimum Prediction Deviation
+  alias: MPD
+  definitions:
+  - source: darling-2019
+    at: §3.1.2, pp. 27–28
+    text: >-
+      A covariate-dependent measure of uncertainty for a two-class classifier’s
+      prediction at an input $x$. Let $q(x)$ be the estimated probability that
+      $x$ belongs to the first class, with its distribution obtained from classifiers
+      trained on resampled data, for example by bootstrap sampling. MPD is $U_q(x)
+      = \min[u_0(x), u_1(x)]$, where $u_0(x) = \sqrt{E[q(x)^2]}$ and $u_1(x) =
+      \sqrt{E[(q(x)-1)^2]}$ measure how far $q(x)$ deviates from 0 and from 1.
+      It ranges from 0, when all probability mass is at 0 or 1, to $1/\sqrt{2}
+      \approx 0.707$, when half the mass is at 0 and half at 1.
+  - source: darling-2019
+    at: §3.1, pp. 24, 28
+    text: >-
+      A measure that quantifies two notions of uncertainty at once: *intrinsic*
+      uncertainty, “the uncertainty of classification even when the probabilistic
+      structure is completely known”, and *empirical* uncertainty, “the uncertainty
+      of estimated outcomes produced by a learned classifier”.
+  - source: darling-2019
+    at: §3.1.3, p. 29
+    text: >-
+      A density-weighted variant covers a third notion, the significance of uncertainty
+      relative to the density of the data. MPD is multiplied by the probability
+      mass $P(B(x, D))$ of the data within a ball of radius $D$ around $x$, to
+      place less emphasis on low-density regions, or by its complement, to place
+      more emphasis on them, as in anomaly detection.
+  - source: field-darling-2022
+    at: §3.3.1, §3.4, pp. 20–24
+    text: >-
+      Generalised to $\kappa \ge 2$ classes as $\mathrm{MPD}(x' \mid T) = \min_{i}
+      \left(E[(1 - Q_i(x'))^2]\right)^{1/2}$, where $Q_i(x')$ is the random probability
+      that a classifier trained on data $T$ assigns to class $C_i$, sampled for
+      example by bootstrap. It takes values in $[0, 1]$: 0 when the model predicts
+      one class with probability one, and at most $\sqrt{(\kappa-1)/\kappa}$,
+      when the probability mass is split equally among the $\kappa$ single-class
+      predictions. A decision maker sets a threshold $t_{\mathrm{MPD}}$ and does
+      not trust the model to predict an instance whose MPD exceeds it.
+  note: >-
+    MPD was introduced by Darling (2019) for two classes; Field and Darling (2022)
+    generalise it to any number of classes, and for two classes the definitions
+    agree. Unlike the standard deviation or a confidence interval, it measures
+    the deviation of the probability estimates from the class extremes rather
+    than from their mean. It therefore separates distributions with the same mean
+    that are tightly clustered, bimodal, or spread out. For a consistent learning
+    method, MPD converges to the intrinsic uncertainty $\min(p_1, 1-p_1)$ as the
+    training sample grows. Its intended use is post-learning decision making:
+    accepting a prediction when its uncertainty is within an application-specific
+    tolerance, and otherwise sending it for further analysis or human review.
+  related:
+  - uncertainty-quantification
+  - solution-uncertainty
+  - model-form-uncertainty
+  - reliability
+  - local-outlier-factor
+  - decision-theory
 - key: model
   term: Model
   alias: ML model
@@ -260,6 +544,56 @@ terms:
   - ai-system
   - hyperparameter
   - model-card
+- key: model-form-uncertainty
+  term: Model-Form Uncertainty
+  alias: model inadequacy
+  definitions:
+  - source: stracuzzi-2017
+    at: p. 15
+    quote: true
+    text: >-
+      Model-form uncertainty arises from the learning process: many plausible
+      model parameterizations exist and each provides a slightly different output.
+  - source: darling-2019
+    at: p. 11
+    quote: true
+    text: >-
+      The choice of learning algorithm and the parameterization of the subsequent
+      model is a source of variability.
+  - source: kennedy-ohagan-2001
+    text: >-
+      Termed *model inadequacy*: the difference between the true process and a
+      computer model’s output even at the best-fitting parameter values, represented
+      as a model discrepancy term during calibration.
+  - source: roy-oberkampf-2011
+    text: >-
+      Uncertainty due to the assumptions and approximations made in formulating
+      a model. It is estimated by comparing model predictions with experimental
+      data during validation, and extrapolated to conditions where no data exist.
+  - source: field-darling-2022
+    at: §3.1.2, p. 14
+    text: >-
+      Uncertainty from the choice among classification algorithms, such as decision
+      trees and linear classifiers, and their parameter settings, such as the
+      maximum depth of a tree: different models trained on identical data may
+      yield different predictions for the same instance. It can be ignored only
+      if the predicted class stays the same across algorithms and a wide range
+      of parameter values, which is rarely true.
+  note: >-
+    In physics-based modelling, model-form uncertainty comes from simplifications
+    of the governing equations. In machine learning it comes from the learning
+    process itself: model induction is ill-posed, so different samples of the
+    training data, or different classes of model, give different but equally plausible
+    models. In the pipeline figure of Darling (2019), two inputs feed statistical
+    model induction: the *model structure*, such as the learning algorithm and
+    its form, and the *model fit criteria*, such as the loss and any regularization
+    penalty.
+  related:
+  - uncertainty-quantification
+  - featurization
+  - inference-error
+  - solution-uncertainty
+  - model
 - key: neural-network
   term: Neural Network
   alias: artificial neural network
@@ -307,6 +641,32 @@ terms:
   - training-data
   - validation-data
   - test-data
+- key: regularization
+  term: Regularization
+  definitions:
+  - source: goodfellow-2016
+    at: ch. 7
+    quote: true
+    text: >-
+      Any modification we make to a learning algorithm that is intended to reduce
+      its generalization error but not its training error.
+  - source: bishop-2006
+    at: §1.1
+    text: >-
+      Adding a penalty term to the error function to discourage the coefficients
+      from reaching large values, controlling over-fitting. Examples are weight
+      decay and, in Bayesian terms, a prior over the parameters.
+  related:
+  - overfitting
+  - generalization
+  - featurization
+  - model-form-uncertainty
+  note: >-
+    Not to be confused with *input regularization*, the featurization step of
+    the ML pipeline in uncertainty quantification. Regularization in the sense
+    used here, penalty terms or priors that constrain how a model is fitted, is
+    part of model induction, as one of the model fit criteria in Darling’s (2019)
+    pipeline, where it contributes to model-form uncertainty.
 - key: reinforcement-learning
   term: Reinforcement Learning
   alias: RL
@@ -373,6 +733,45 @@ terms:
   related:
   - foundation-model
   - unsupervised-learning
+- key: solution-uncertainty
+  term: Solution Uncertainty
+  alias: predictive uncertainty
+  definitions:
+  - source: stracuzzi-2017
+    at: p. 14, Fig. 2.2
+    text: >-
+      The uncertainty in a model’s prediction for an unobservable state. It combines
+      the uncertainties from every step of the ML pipeline: measurement errors,
+      regularization effects, model-form uncertainty, and inference errors.
+  - source: darling-2019
+    at: p. 11, Fig. 2.5
+    quote: true
+    text: >-
+      The solution uncertainty is the union of uncertainties associated with measurements,
+      regularization, model-form, and inference.
+  - source: hullermeier-2021
+    text: >-
+      The *total* uncertainty of a prediction, made up of aleatoric uncertainty,
+      from randomness in the data, and epistemic uncertainty, from the model’s
+      lack of knowledge.
+  - source: nasem-2012
+    text: >-
+      The overall uncertainty in a computed quantity of interest, to which UQ
+      attributes the contributions of the individual sources of uncertainty.
+  note: >-
+    Darling (2019) adds a fifth consideration at the end of the pipeline, interpretation
+    and decision making: “The model’s interface is also a source of uncertainty:
+    the presentation of the outcome can influence a user’s perception of its meaning
+    or validity” (p. 12). Stracuzzi et al. argue that the full distribution over
+    possible outputs matters, not just a confidence interval, because two distributions
+    with the same variance can have very different shapes, for example one bimodal
+    and one unimodal.
+  related:
+  - uncertainty-quantification
+  - measurement-error
+  - featurization
+  - model-form-uncertainty
+  - inference-error
 - key: supervised-learning
   term: Supervised Learning
   definitions:
@@ -477,6 +876,79 @@ terms:
   - large-language-model
   - neural-network
   - deep-learning
+- key: uncertainty-quantification
+  term: Uncertainty Quantification
+  alias: UQ
+  definitions:
+  - source: stracuzzi-2017
+    at: p. 11
+    quote: true
+    text: >-
+      If machine learning establishes relationships between observable and unobservable
+      variables, then uncertainty quantification characterizes the variability
+      in those relationships.
+  - source: darling-2019
+    at: p. 3
+    text: >-
+      Characterising the uncertainty in a supervised model’s predictions, for
+      each individual input, in order to quantify the degree to which the end
+      user can have confidence in those predictions.
+  - source: nasem-2012
+    text: >-
+      The process of quantifying uncertainties in a computed quantity of interest,
+      with the goals of accounting for all sources of uncertainty and quantifying
+      how much specific sources contribute to the overall uncertainty. It is one
+      of three pillars of model credibility, with verification and validation.
+  - source: sullivan-2015
+    text: >-
+      In computational science, the study of two kinds of problem. *Forward* problems
+      propagate uncertainty in a model’s inputs and parameters through the model
+      to its outputs. *Inverse* problems infer uncertain parameters, or the model
+      itself, from observed data, typically in a Bayesian framework.
+  - source: abdar-2021
+    text: >-
+      Methods that estimate how much confidence to place in a machine learning
+      model’s predictions, such as Bayesian neural networks, Monte Carlo dropout,
+      and deep ensembles, so that uncertainty can be accounted for in optimisation
+      and decision-making.
+  - source: hullermeier-2021
+    text: >-
+      Estimating and separating two kinds of predictive uncertainty. *Aleatoric*
+      uncertainty comes from inherent randomness in the data and cannot be reduced.
+      *Epistemic* uncertainty comes from the model’s lack of knowledge and can
+      in principle be reduced with more data.
+  note: >-
+    For machine learning, UQ is an *inverse* UQ problem. In science and engineering,
+    inverse UQ usually starts from a model built from theoretical equations, such
+    as a simulation governed by partial differential equations, and calibrates
+    its uncertain parameters against observations. Machine learning follows the
+    same steps, but the model is a statistical model induced from data, which
+    makes model-form uncertainty central (Stracuzzi et al. 2017). Uncertainty
+    enters at each step of the ML pipeline: measurement error in the observations,
+    regularization effects from featurization of the inputs, model-form uncertainty
+    from learning, and inference error when the model produces outputs. Together
+    these make up the solution uncertainty of the inferred state, which people
+    then interpret to make decisions. Uncertainty is also distinct from probability
+    and error: “Given a fixed model, probability measures the likelihood or belief
+    in an inferred outcome, uncertainty characterizes the variability in outcomes,
+    and error describes differences between predicted outcomes and actual observations”
+    (Darling 2019, p. 12). And it is distinct from accuracy-based performance
+    metrics such as ROC curves, which do not capture the variability in a model’s
+    output. Field and Darling (2022) group the sources differently, into uncertainty
+    from the data (pre-processing and measurement error, limited training data,
+    and extrapolation error) and uncertainty from the model (model-form uncertainty
+    and feature selection).
+  related:
+  - measurement-error
+  - featurization
+  - model-form-uncertainty
+  - inference-error
+  - solution-uncertainty
+  - reliability
+  - validity
+  - minimum-prediction-deviation
+  - extrapolation-error
+  - decision-theory
 - key: unsupervised-learning
   term: Unsupervised Learning
   definitions:

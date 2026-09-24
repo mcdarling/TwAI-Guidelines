@@ -30,6 +30,39 @@ terms:
   - transparency
   - auditability
   - ai-governance
+- key: accuracy
+  term: Accuracy
+  definitions:
+  - source: iso-5723
+    quote: true
+    text: >-
+      The closeness of results of observations, computations, or estimates to
+      the true values or the values accepted as being true.
+  - source: goodfellow-2016
+    at: §5.1.2
+    text: >-
+      For classification, the proportion of examples for which the model produces
+      the correct output. Its complement is the error rate.
+  - source: eu-ai-act
+    at: Art. 15
+    text: >-
+      High-risk AI systems must achieve an appropriate level of accuracy, and
+      the levels of accuracy and the relevant accuracy metrics must be declared
+      in their instructions for use.
+  note: >-
+    The NIST AI RMF (§3.1) adopts the ISO/IEC TS 5723 definition and adds that
+    measures of accuracy should consider computational-centric measures, such
+    as false positive and false negative rates, human-AI teaming, and external
+    validity, meaning results generalise beyond the training conditions. Accuracy
+    measurements should always be paired with clearly defined and realistic test
+    sets, representative of the conditions of expected use, and with details about
+    the test methodology. The ML metric called accuracy is only one such measure,
+    and can mislead when classes are imbalanced.
+  related:
+  - validity
+  - reliability
+  - robustness
+  - test-data
 - key: adversarial-example
   term: Adversarial Example
   definitions:
@@ -76,34 +109,6 @@ terms:
   - accountability
   - ai-risk
   - auditability
-- key: ai-risk
-  term: AI Risk
-  definitions:
-  - source: eu-ai-act
-    at: Art. 3(2)
-    quote: true
-    text: >-
-      The combination of the probability of an occurrence of harm and the severity
-      of that harm.
-  - source: nist-ai-rmf
-    at: §1.1
-    text: >-
-      A composite measure of an event's probability of occurring and the magnitude
-      or degree of the consequences. AI risks can affect individuals, groups,
-      organisations, communities, society, the environment, and the planet.
-  - source: iso-31000
-    text: >-
-      The effect of uncertainty on objectives, where an effect is a deviation
-      from the expected and can be positive, negative, or both.
-  note: >-
-    ISO 31000 counts positive deviations (opportunities) as risk. The EU AI Act
-    and NIST AI RMF concentrate on harm. The EU AI Act classifies systems into
-    risk tiers (prohibited, high-risk, limited, and minimal), and each tier carries
-    different obligations.
-  related:
-  - ai-governance
-  - safety
-  - red-teaming
 - key: alignment
   term: Alignment
   alias: AI alignment
@@ -294,10 +299,10 @@ terms:
   definitions:
   - source: nist-ai-rmf
     at: §3.7
+    quote: true
     text: >-
-      The characteristic “fair — with harmful bias managed”: concerns for equality
-      and equity, addressed by managing harmful bias and discrimination. Standards
-      of fairness are complex and differ across cultures and applications.
+      Fairness in AI includes concerns for equality and equity by addressing issues
+      such as harmful bias and discrimination.
   - source: dwork-2012
     text: >-
       *Individual fairness*: similar individuals should be treated similarly,
@@ -315,9 +320,13 @@ terms:
       avoiding unfair bias, accessibility and universal design, and involving
       stakeholders throughout the lifecycle.
   note: >-
-    Group criteria, such as demographic parity and equalised odds, and individual
-    criteria cannot in general all be satisfied at once. Choosing among them is
-    a normative decision that should be documented.
+    NIST adds that standards of fairness can be complex and difficult to define,
+    because perceptions of fairness differ among cultures and may shift depending
+    on application, and that systems in which harmful biases are mitigated are
+    not necessarily fair (see the useful note on fairness in the absence of harmful
+    bias). Group criteria, such as demographic parity and equalised odds, and
+    individual criteria cannot in general all be satisfied at once. Choosing among
+    them is a normative decision that should be documented.
   related:
   - bias
   - accountability
@@ -419,11 +428,13 @@ terms:
   definitions:
   - source: nist-ai-rmf
     at: §3.6
+    quote: true
     text: >-
-      The norms and practices that help to safeguard human autonomy, identity,
-      and dignity. These include freedom from intrusion, limits on observation,
-      and individuals' agency to consent to disclosure or control of facets of
-      their identities.
+      Privacy refers generally to the norms and practices that help to safeguard
+      human autonomy, identity, and dignity. These norms and practices typically
+      address freedom from intrusion, limiting observation, or individuals’ agency
+      to consent to disclosure or control of facets of their identities (e.g.,
+      body, data, reputation).
   - source: hleg-2019
     text: >-
       The requirement *privacy and data governance*: respect for privacy, the
@@ -494,11 +505,11 @@ terms:
 - key: reliability
   term: Reliability
   definitions:
-  - source: nist-ai-rmf
-    at: §3.1
+  - source: iso-5723
+    quote: true
     text: >-
       The ability of an item to perform as required, without failure, for a given
-      time interval under given conditions.
+      time interval, under given conditions.
   - source: iso-22989
     text: The property of consistent intended behaviour and results.
   - source: hleg-2019
@@ -511,16 +522,24 @@ terms:
   - validity
   - robustness
   - distribution-shift
+  - uncertainty-quantification
+  - accuracy
+  note: >-
+    The NIST AI RMF (§3.1) adopts the ISO/IEC TS 5723 definition. ISO/IEC TS 5723
+    defines trustworthiness for systems and their associated services, along with
+    a selected set of their characteristics.
 - key: resilience
   term: Resilience
   definitions:
   - source: nist-ai-rmf
     at: §3.3
+    quote: true
     text: >-
-      An AI system is resilient if it can withstand unexpected adverse events
-      or unexpected changes in its environment or use, or if it can maintain its
-      functions and structure in the face of internal and external change and
-      degrade safely and gracefully when necessary.
+      AI systems, as well as the ecosystems in which they are deployed, may be
+      said to be resilient if they can withstand unexpected adverse events or
+      unexpected changes in their environment or use – or if they can maintain
+      their functions and structure in the face of internal and external change
+      and degrade safely and gracefully when this is necessary.
   - source: eu-ai-act
     at: Art. 15
     text: >-
@@ -537,6 +556,90 @@ terms:
   - security
   - robustness
   - safety
+  note: NIST adapts its definition from ISO/IEC TS 5723:2022.
+- key: ai-risk
+  term: Risk
+  definitions:
+  - source: cisa-2021
+    quote: true
+    text: >-
+      Potential for an unwanted outcome resulting from an incident, event, or
+      occurrence, as determined by its likelihood and associated consequences.
+  - source: eu-ai-act
+    at: Art. 3(2)
+    quote: true
+    text: >-
+      The combination of the probability of an occurrence of harm and the severity
+      of that harm.
+  - source: nist-ai-rmf
+    at: §1.1
+    text: >-
+      A composite measure of an event's probability of occurring and the magnitude
+      or degree of the consequences. AI risks can affect individuals, groups,
+      organisations, communities, society, the environment, and the planet.
+  - source: iso-31000
+    text: >-
+      The effect of uncertainty on objectives, where an effect is a deviation
+      from the expected and can be positive, negative, or both.
+  note: >-
+    ISO 31000 counts positive deviations (opportunities) as risk. The EU AI Act
+    and NIST AI RMF concentrate on harm. The EU AI Act classifies systems into
+    risk tiers (prohibited, high-risk, limited, and minimal), and each tier carries
+    different obligations. CISA’s definition frames risk around incidents; its
+    example is a team calculating the risk of a terrorist attack after analysing
+    intelligence reports, vulnerability assessments, and consequence models.
+  related:
+  - ai-governance
+  - safety
+  - red-teaming
+  - risk-framework
+  - risk-methodology
+  alias: AI risk
+- key: risk-framework
+  term: Risk Framework
+  definitions:
+  - source: twai-internal
+    quote: true
+    text: >-
+      A risk framework is a way of categorizing risk and identifying risk cases.
+      The AI Security Tree is an example of a risk framework.
+  - source: iso-guide-73
+    at: §2.1.1
+    text: >-
+      A *risk management framework* is the set of components that provide the
+      foundations and organisational arrangements for designing, implementing,
+      monitoring, reviewing, and continually improving risk management throughout
+      an organisation.
+  - source: nist-ai-rmf
+    at: §5
+    text: >-
+      The AI RMF is itself a risk management framework, organised into four functions:
+      GOVERN, MAP, MEASURE, and MANAGE.
+  note: >-
+    The TwAI sense is a taxonomy of risks. The ISO sense is the organisational
+    arrangements for managing risk. The NIST AI RMF combines both, with categories
+    of risk and trustworthiness characteristics inside an organisational process.
+  related:
+  - risk-methodology
+  - ai-risk
+  - ai-governance
+- key: risk-methodology
+  term: Risk Methodology
+  definitions:
+  - source: twai-internal
+    quote: true
+    text: >-
+      A risk methodology, e.g., SIE, is a formal process for identifying, characterizing,
+      and quantifying risk in a system.
+  - source: iso-guide-73
+    at: §3.4.1
+    text: >-
+      The closest standard concept is *risk assessment*: the overall process of
+      risk identification, risk analysis, and risk evaluation.
+  related:
+  - risk-framework
+  - ai-risk
+  - system-of-systems
 - key: robustness
   term: Robustness
   definitions:
@@ -544,6 +647,21 @@ terms:
     text: >-
       The ability of a system to maintain its level of performance under any circumstances,
       including external interference and harsh environmental conditions.
+  - source: iso-5723
+    quote: true
+    text: >-
+      The ability of a system to maintain its level of performance under a variety
+      of circumstances.
+  - source: nist-ai-rmf
+    at: §3.1
+    quote: true
+    text: >-
+      Robustness is a goal for appropriate system functionality in a broad set
+      of conditions and circumstances, including uses of AI systems not initially
+      anticipated. Robustness requires not only that the system perform exactly
+      as it does under expected uses, but also that it should perform in ways
+      that minimize potential harms to people if it is operating in an unexpected
+      setting.
   - source: hleg-2019
     text: >-
       Named *technical robustness and safety*: AI systems are resilient to attack,
@@ -564,6 +682,13 @@ terms:
   - validity
   - reliability
   - distribution-shift
+  - uncertainty-quantification
+  - accuracy
+  note: >-
+    ISO/IEC 22989 asks for maintained performance under *any* circumstances, ISO/IEC
+    TS 5723 under *a variety* of them. NIST extends the idea to unanticipated
+    uses, where the goal becomes minimising harm rather than matching expected
+    performance.
 - key: safety
   term: Safety
   alias: AI safety
@@ -620,15 +745,43 @@ terms:
   - adversarial-example
   - data-poisoning
   - prompt-injection
+- key: system-of-systems
+  term: System of Systems
+  alias: SoS
+  definitions:
+  - source: twai-internal
+    quote: true
+    text: >-
+      When an AI system is introduced into another system, you now have a SoS,
+      which may introduce AI + System Risk Factors.
+  - source: dod-sos-2008
+    text: >-
+      A set or arrangement of systems that results when independent and useful
+      systems are integrated into a larger system that delivers unique capabilities.
+  - source: maier-1998
+    text: >-
+      An assemblage of components that are themselves systems, distinguished by
+      the operational independence and the managerial independence of those components.
+  note: >-
+    TwAI currently uses *system of systems*, *internal system dynamics*, and *AI
+    + System Risk Factors* somewhat interchangeably. They could be distinguished:
+    the system of systems is the combined system, internal system dynamics are
+    the interactions among its component systems, and AI + System Risk Factors
+    are the risks that arise from those interactions.
+  related:
+  - ai-system
+  - ai-risk
+  - risk-framework
 - key: transparency
   term: Transparency
   definitions:
   - source: nist-ai-rmf
     at: §3.4
+    quote: true
     text: >-
-      The extent to which information about an AI system and its outputs is available
-      to the individuals who interact with it, whether or not they know they are
-      doing so.
+      Transparency reflects the extent to which information about an AI system
+      and its outputs is available to individuals interacting with such a system
+      – regardless of whether they are even aware that they are doing so.
   - source: hleg-2019
     text: >-
       A requirement covering *traceability* of data and processes, *explainability*,
@@ -650,6 +803,13 @@ terms:
   - explainability
   - accountability
   - model-card
+  note: >-
+    NIST adds that meaningful transparency provides access to appropriate levels
+    of information, based on the stage of the AI lifecycle and tailored to the
+    role or knowledge of the AI actors or individuals using the system, and that
+    by promoting higher levels of understanding, transparency increases confidence
+    in the AI system. See the useful note on how transparency, explainability,
+    and interpretability relate.
 - key: trustworthy-ai
   term: Trustworthy AI
   definitions:
@@ -693,6 +853,42 @@ terms:
   - transparency
   - validity
   - reliability
+- key: validation
+  term: Validation
+  definitions:
+  - source: iso-9000
+    quote: true
+    text: >-
+      Confirmation, through the provision of objective evidence, that the requirements
+      for a specific intended use or application have been fulfilled.
+  - source: nist-ai-rmf
+    at: §3.1
+    text: >-
+      Adopts the ISO 9000 definition. Deploying AI systems that are inaccurate,
+      unreliable, or poorly generalised to data and settings beyond their training
+      creates and increases negative AI risks and reduces trustworthiness.
+  - source: roy-oberkampf-2011
+    text: >-
+      In scientific computing, the process of determining the degree to which
+      a model is an accurate representation of the real world from the perspective
+      of its intended uses, usually by comparing predictions with experimental
+      data. It is distinguished from *verification*, which checks that the model
+      is solved correctly.
+  - source: hastie-2009
+    at: §7.2
+    text: >-
+      In machine learning, estimating a model’s prediction error on data held
+      out from training, in order to choose among candidate models.
+  note: >-
+    The quality-management and scientific-computing senses ask whether a system
+    is fit for its intended use. The machine learning sense is narrower: a held-out
+    evaluation used during model selection, done with validation data. ISO 9000:2015
+    sets out the fundamental concepts and principles of quality management.
+  related:
+  - validity
+  - validation-data
+  - accuracy
+  - reliability
 - key: validity
   term: Validity
   definitions:
@@ -712,6 +908,9 @@ terms:
     use. The measurement definition concerns whether the quantities a system predicts
     or is evaluated on mean what they claim to mean.
   related:
+  - validation
   - reliability
   - validation-data
   - trustworthy-ai
+  - uncertainty-quantification
+  - accuracy
