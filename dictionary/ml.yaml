@@ -331,6 +331,51 @@ terms:
   - featurization
   - solution-uncertainty
   - training-data
+- key: minimum-prediction-deviation
+  term: Minimum Prediction Deviation
+  alias: MPD
+  definitions:
+  - source: darling-2019
+    at: §3.1.2, pp. 27–28
+    text: >-
+      A covariate-dependent measure of uncertainty for a two-class classifier’s
+      prediction at an input $x$. Let $q(x)$ be the estimated probability that
+      $x$ belongs to the first class, with its distribution obtained from classifiers
+      trained on resampled data, for example by bootstrap sampling. MPD is $U_q(x)
+      = \min[u_0(x), u_1(x)]$, where $u_0(x) = \sqrt{E[q(x)^2]}$ and $u_1(x) =
+      \sqrt{E[(q(x)-1)^2]}$ measure how far $q(x)$ deviates from 0 and from 1.
+      It ranges from 0, when all probability mass is at 0 or 1, to $1/\sqrt{2}
+      \approx 0.707$, when half the mass is at 0 and half at 1.
+  - source: darling-2019
+    at: §3.1, pp. 24, 28
+    text: >-
+      A measure that quantifies two notions of uncertainty at once: *intrinsic*
+      uncertainty, “the uncertainty of classification even when the probabilistic
+      structure is completely known”, and *empirical* uncertainty, “the uncertainty
+      of estimated outcomes produced by a learned classifier”.
+  - source: darling-2019
+    at: §3.1.3, p. 29
+    text: >-
+      A density-weighted variant covers a third notion, the significance of uncertainty
+      relative to the density of the data. MPD is multiplied by the probability
+      mass $P(B(x, D))$ of the data within a ball of radius $D$ around $x$, to
+      place less emphasis on low-density regions, or by its complement, to place
+      more emphasis on them, as in anomaly detection.
+  note: >-
+    MPD was introduced by Darling (2019), so all three definitions come from that
+    source. Unlike the standard deviation or a confidence interval, it measures
+    the deviation of the probability estimates from the class extremes rather
+    than from their mean. It therefore separates distributions with the same mean
+    that are tightly clustered, bimodal, or spread out. For a consistent learning
+    method, MPD converges to the intrinsic uncertainty $\min(p_1, 1-p_1)$ as the
+    training sample grows. Its intended use is post-learning decision making:
+    accepting a prediction when its uncertainty is within an application-specific
+    tolerance, and otherwise sending it for further analysis or human review.
+  related:
+  - uncertainty-quantification
+  - solution-uncertainty
+  - model-form-uncertainty
+  - reliability
 - key: model
   term: Model
   alias: ML model
@@ -744,6 +789,7 @@ terms:
   - solution-uncertainty
   - reliability
   - validity
+  - minimum-prediction-deviation
 - key: unsupervised-learning
   term: Unsupervised Learning
   definitions:
