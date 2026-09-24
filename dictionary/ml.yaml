@@ -92,6 +92,31 @@ terms:
   related:
   - deep-learning
   - retrieval-augmented-generation
+- key: featurization
+  term: Featurization
+  alias: input regularization, feature engineering
+  definitions:
+  - source: stracuzzi-2017
+    at: pp. 14–15
+    text: >-
+      Preprocessing observations before a model is induced from them, such as
+      applying a low-pass filter to seismic waveforms. Its *regularization effects*
+      are a source of uncertainty in the ML pipeline: preprocessing that removes
+      irrelevant signals may also alter the information of interest.
+  - source: zheng-casari-2018
+    text: >-
+      *Feature engineering*: extracting features from raw data and transforming
+      them into formats suitable for a machine learning model.
+  note: >-
+    Stracuzzi et al. (2017) call this step *regularization*, and a later version of
+    the pipeline diagram calls it *input regularization*. This dictionary uses featurization
+    to avoid confusion with regularization in the sense of penalty terms or priors,
+    which constrain model fitting and belong to model induction.
+  related:
+  - measurement-error
+  - model-form-uncertainty
+  - uncertainty-quantification
+  - regularization
 - key: fine-tuning
   term: Fine-Tuning
   definitions:
@@ -284,7 +309,7 @@ terms:
     at prediction time.
   related:
   - uncertainty-quantification
-  - regularization
+  - featurization
   - solution-uncertainty
   - training-data
 - key: model
@@ -338,7 +363,7 @@ terms:
     models.
   related:
   - uncertainty-quantification
-  - regularization
+  - featurization
   - inference-error
   - solution-uncertainty
   - model
@@ -404,19 +429,16 @@ terms:
       Adding a penalty term to the error function to discourage the coefficients
       from reaching large values, controlling over-fitting. Examples are weight
       decay and, in Bayesian terms, a prior over the parameters.
-  - source: stracuzzi-2017
-    at: pp. 14–15
-    text: >-
-      Preprocessing the data and biasing the model, for example with a prior,
-      to push its parameterization toward specific areas of the solution space.
-      *Regularization effects* are a source of uncertainty: preprocessing that
-      removes irrelevant signals may also alter the information of interest.
   related:
   - overfitting
   - generalization
-  - measurement-error
+  - featurization
   - model-form-uncertainty
-  - uncertainty-quantification
+  note: >-
+    Not to be confused with *input regularization*, the featurization step of
+    the ML pipeline in uncertainty quantification. Regularization in the sense
+    used here, penalty terms or priors that constrain how a model is fitted, is
+    part of model induction, where it contributes to model-form uncertainty.
 - key: reinforcement-learning
   term: Reinforcement Learning
   alias: RL
@@ -509,7 +531,7 @@ terms:
   related:
   - uncertainty-quantification
   - measurement-error
-  - regularization
+  - featurization
   - model-form-uncertainty
   - inference-error
 - key: supervised-learning
@@ -659,7 +681,7 @@ terms:
     same steps, but the model is a statistical model induced from data, which
     makes model-form uncertainty central (Stracuzzi et al. 2017). Uncertainty
     enters at each step of the ML pipeline: measurement error in the observations,
-    regularization effects from preprocessing and priors, model-form uncertainty
+    regularization effects from featurization of the inputs, model-form uncertainty
     from learning, and inference error when the model produces outputs. Together
     these make up the solution uncertainty of a prediction. UQ is also distinct
     from probability: “probability measures the likelihood or belief in an inferred
@@ -669,7 +691,7 @@ terms:
     which do not capture the variability in a model’s output.
   related:
   - measurement-error
-  - regularization
+  - featurization
   - model-form-uncertainty
   - inference-error
   - solution-uncertainty
