@@ -103,15 +103,21 @@ terms:
       applying a low-pass filter to seismic waveforms. Its *regularization effects*
       are a source of uncertainty in the ML pipeline: preprocessing that removes
       irrelevant signals may also alter the information of interest.
+  - source: darling-2019
+    text: >-
+      Termed *input regularization*: the step in the machine learning pipeline
+      between the indirect observations and statistical model induction. Its *regularization
+      effects* are one of the sources that combine into the solution uncertainty
+      of a prediction.
   - source: zheng-casari-2018
     text: >-
       *Feature engineering*: extracting features from raw data and transforming
       them into formats suitable for a machine learning model.
   note: >-
-    Stracuzzi et al. (2017) call this step *regularization*, and a later version of
-    the pipeline diagram calls it *input regularization*. This dictionary uses featurization
-    to avoid confusion with regularization in the sense of penalty terms or priors,
-    which constrain model fitting and belong to model induction.
+    Stracuzzi et al. (2017) call this step *regularization*, and Darling (2019)
+    calls it *input regularization*. This dictionary uses featurization to avoid
+    confusion with regularization in the sense of penalty terms or priors, which
+    constrain model fitting and belong to model induction.
   related:
   - measurement-error
   - model-form-uncertainty
