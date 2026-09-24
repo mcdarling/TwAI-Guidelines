@@ -182,6 +182,25 @@ terms:
   - validation-data
   - test-data
   - model
+- key: inference-error
+  term: Inference Error
+  definitions:
+  - source: stracuzzi-2017
+    at: p. 14
+    text: >-
+      Error introduced when inference procedures map examples through the learned
+      model into output values. Depending on the model, inference may only be
+      approximate.
+  - source: blei-2017
+    text: >-
+      In Bayesian models, the error introduced by approximating an intractable
+      posterior, for example with variational inference or Markov chain Monte
+      Carlo. Variational inference in particular tends to underestimate the variance
+      of the posterior.
+  related:
+  - uncertainty-quantification
+  - model-form-uncertainty
+  - solution-uncertainty
 - key: loss-function
   term: Loss Function
   alias: cost function, objective
@@ -237,6 +256,37 @@ terms:
   - supervised-learning
   - unsupervised-learning
   - reinforcement-learning
+- key: measurement-error
+  term: Measurement Error
+  definitions:
+  - source: stracuzzi-2017
+    at: pp. 14–15
+    text: >-
+      The first source of uncertainty in the ML pipeline: error in the observations
+      themselves. For a seismograph, it arises from calibration, from vibrations
+      with non-seismic sources such as wind, and from limited sensor sensitivity.
+  - source: jcgm-100
+    at: §B.2.19
+    text: >-
+      The result of a measurement minus the true value of the quantity being measured.
+      Because the true value cannot be known exactly, the error cannot be known
+      exactly either.
+  - source: jcgm-100
+    at: §2.2.3
+    text: >-
+      Distinguished from *measurement uncertainty*: a parameter, associated with
+      the result of a measurement, that characterises the dispersion of the values
+      that could reasonably be attributed to the quantity being measured.
+  note: >-
+    Metrology separates the error of a single result, which is unknowable, from
+    the uncertainty that characterises the plausible range of values. In machine
+    learning, measurement error affects both the training data and the inputs
+    at prediction time.
+  related:
+  - uncertainty-quantification
+  - regularization
+  - solution-uncertainty
+  - training-data
 - key: model
   term: Model
   alias: ML model
@@ -260,6 +310,38 @@ terms:
   - ai-system
   - hyperparameter
   - model-card
+- key: model-form-uncertainty
+  term: Model-Form Uncertainty
+  alias: model inadequacy
+  definitions:
+  - source: stracuzzi-2017
+    at: p. 15
+    quote: true
+    text: >-
+      Model-form uncertainty arises from the learning process: many plausible
+      model parameterizations exist and each provides a slightly different output.
+  - source: kennedy-ohagan-2001
+    text: >-
+      Termed *model inadequacy*: the difference between the true process and a
+      computer model’s output even at the best-fitting parameter values, represented
+      as a model discrepancy term during calibration.
+  - source: roy-oberkampf-2011
+    text: >-
+      Uncertainty due to the assumptions and approximations made in formulating
+      a model. It is estimated by comparing model predictions with experimental
+      data during validation, and extrapolated to conditions where no data exist.
+  note: >-
+    In physics-based modelling, model-form uncertainty comes from simplifications
+    of the governing equations. In machine learning it comes from the learning
+    process itself: model induction is ill-posed, so different samples of the
+    training data, or different classes of model, give different but equally plausible
+    models.
+  related:
+  - uncertainty-quantification
+  - regularization
+  - inference-error
+  - solution-uncertainty
+  - model
 - key: neural-network
   term: Neural Network
   alias: artificial neural network
@@ -307,6 +389,34 @@ terms:
   - training-data
   - validation-data
   - test-data
+- key: regularization
+  term: Regularization
+  definitions:
+  - source: goodfellow-2016
+    at: ch. 7
+    quote: true
+    text: >-
+      Any modification we make to a learning algorithm that is intended to reduce
+      its generalization error but not its training error.
+  - source: bishop-2006
+    at: §1.1
+    text: >-
+      Adding a penalty term to the error function to discourage the coefficients
+      from reaching large values, controlling over-fitting. Examples are weight
+      decay and, in Bayesian terms, a prior over the parameters.
+  - source: stracuzzi-2017
+    at: pp. 14–15
+    text: >-
+      Preprocessing the data and biasing the model, for example with a prior,
+      to push its parameterization toward specific areas of the solution space.
+      *Regularization effects* are a source of uncertainty: preprocessing that
+      removes irrelevant signals may also alter the information of interest.
+  related:
+  - overfitting
+  - generalization
+  - measurement-error
+  - model-form-uncertainty
+  - uncertainty-quantification
 - key: reinforcement-learning
   term: Reinforcement Learning
   alias: RL
@@ -373,6 +483,35 @@ terms:
   related:
   - foundation-model
   - unsupervised-learning
+- key: solution-uncertainty
+  term: Solution Uncertainty
+  alias: predictive uncertainty
+  definitions:
+  - source: stracuzzi-2017
+    at: p. 14, Fig. 2.2
+    text: >-
+      The uncertainty in a model’s prediction for an unobservable state. It combines
+      the uncertainties from every step of the ML pipeline: measurement errors,
+      regularization effects, model-form uncertainty, and inference errors.
+  - source: hullermeier-2021
+    text: >-
+      The *total* uncertainty of a prediction, made up of aleatoric uncertainty,
+      from randomness in the data, and epistemic uncertainty, from the model’s
+      lack of knowledge.
+  - source: nasem-2012
+    text: >-
+      The overall uncertainty in a computed quantity of interest, to which UQ
+      attributes the contributions of the individual sources of uncertainty.
+  note: >-
+    Stracuzzi et al. argue that the full distribution over possible outputs matters,
+    not just a confidence interval, because two distributions with the same variance
+    can have very different shapes, for example one bimodal and one unimodal.
+  related:
+  - uncertainty-quantification
+  - measurement-error
+  - regularization
+  - model-form-uncertainty
+  - inference-error
 - key: supervised-learning
   term: Supervised Learning
   definitions:
@@ -481,6 +620,13 @@ terms:
   term: Uncertainty Quantification
   alias: UQ
   definitions:
+  - source: stracuzzi-2017
+    at: p. 11
+    quote: true
+    text: >-
+      If machine learning establishes relationships between observable and unobservable
+      variables, then uncertainty quantification characterizes the variability
+      in those relationships.
   - source: nasem-2012
     text: >-
       The process of quantifying uncertainties in a computed quantity of interest,
@@ -505,29 +651,30 @@ terms:
       uncertainty comes from inherent randomness in the data and cannot be reduced.
       *Epistemic* uncertainty comes from the model’s lack of knowledge and can
       in principle be reduced with more data.
-  - source: jcgm-100
-    at: §2.2.3
-    text: >-
-      Builds on the metrological concept of *measurement uncertainty*: a parameter,
-      associated with the result of a measurement, that characterises the dispersion
-      of the values that could reasonably be attributed to the quantity being
-      measured.
   note: >-
-    UQ means something different for physics-based and machine learning models.
-    In a physics-based model, such as a simulation governed by partial differential
-    equations, the structure comes from known laws: forward UQ propagates uncertain
-    inputs and parameters to the outputs, and inverse UQ calibrates the parameters
-    against data. A machine learning model has no governing equations and is learned
-    entirely from data, so training is itself the inverse problem. ML UQ asks
-    how far to trust each prediction given the data the model has seen. Epistemic
-    uncertainty grows for inputs unlike the training data, and the question is
-    often paired with *calibration*, whether predicted probabilities match observed
-    frequencies. Check which sense a document means before comparing UQ results.
+    For machine learning, UQ is an *inverse* UQ problem. In science and engineering,
+    inverse UQ usually starts from a model built from theoretical equations, such
+    as a simulation governed by partial differential equations, and calibrates
+    its uncertain parameters against observations. Machine learning follows the
+    same steps, but the model is a statistical model induced from data, which
+    makes model-form uncertainty central (Stracuzzi et al. 2017). Uncertainty
+    enters at each step of the ML pipeline: measurement error in the observations,
+    regularization effects from preprocessing and priors, model-form uncertainty
+    from learning, and inference error when the model produces outputs. Together
+    these make up the solution uncertainty of a prediction. UQ is also distinct
+    from probability: “probability measures the likelihood or belief in an inferred
+    outcome, while uncertainty characterizes the range of possible outcomes or
+    beliefs due to imperfect information” (Stracuzzi et al. 2017, p. 12). And
+    it is distinct from accuracy-based performance metrics such as ROC curves,
+    which do not capture the variability in a model’s output.
   related:
+  - measurement-error
+  - regularization
+  - model-form-uncertainty
+  - inference-error
+  - solution-uncertainty
   - reliability
   - validity
-  - robustness
-  - distribution-shift
 - key: unsupervised-learning
   term: Unsupervised Learning
   definitions:
