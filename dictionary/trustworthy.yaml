@@ -109,6 +109,30 @@ terms:
   - accountability
   - ai-risk
   - auditability
+- key: algorithmic-transparency
+  term: Algorithmic Transparency
+  definitions:
+  - source: lipton-2018
+    at: §3.1.3
+    text: >-
+      Transparency at the level of the learning algorithm itself. For linear models,
+      the shape of the error surface is understood and training can be proven
+      to converge to a unique solution, even on unseen data. Modern deep learning
+      lacks this: its optimisation procedures work in practice but cannot be guaranteed
+      in advance to work on new problems.
+  - source: barredo-2020
+    text: >-
+      The third level of transparency: the ability of a user to understand the
+      process a model follows to produce any given output from its input data.
+  note: >-
+    In policy writing, *algorithmic transparency* often means something broader:
+    disclosure about how an organisation uses algorithms to make decisions. Lipton’s
+    sense concerns only whether the training procedure is understood. Lipton also
+    notes that humans exhibit none of the three forms of transparency.
+  related:
+  - simulatability
+  - decomposability
+  - transparency
 - key: alignment
   term: Alignment
   alias: AI alignment
@@ -243,6 +267,31 @@ terms:
   - bias
   - training-data
   - transparency
+- key: decomposability
+  term: Decomposability
+  alias: intelligibility
+  definitions:
+  - source: lipton-2018
+    at: §3.1.2
+    quote: true
+    text: >-
+      A second notion of transparency might be that each part of the model - each
+      input, parameter, and calculation - admits an intuitive explanation.
+  - source: barredo-2020
+    text: >-
+      The second level of transparency: the ability to explain each part of a
+      model, such as its inputs, parameters, and calculations, without needing
+      to understand the whole.
+  note: >-
+    Decomposability requires the inputs themselves to be individually interpretable,
+    which rules out models built on highly engineered or anonymous features. Lipton
+    warns that the weights of a linear model can seem intuitive yet be fragile
+    with respect to feature selection and pre-processing.
+  related:
+  - simulatability
+  - algorithmic-transparency
+  - featurization
+  - transparency
 - key: differential-privacy
   term: Differential Privacy
   alias: DP
@@ -293,6 +342,7 @@ terms:
   related:
   - interpretability
   - transparency
+  - post-hoc-interpretability
 - key: fairness
   term: Fairness
   alias: algorithmic fairness
@@ -396,9 +446,27 @@ terms:
       The meaning of an AI system's output in the context of its designed functional
       purpose. It answers the question of *why* a decision was made and what it
       means to the user.
+  - source: lipton-2018
+    at: §§1–3
+    text: >-
+      Not a monolithic concept but several distinct ideas. Proposed techniques
+      fall into two groups: model properties that confer *transparency* (“how
+      does the model work?”) and *post-hoc explanations* (“what else can the model
+      tell me?”). Interpretability is motivated by diverse and sometimes discordant
+      desiderata: trust, causality, transferability, informativeness, and fair
+      and ethical decision-making.
   related:
   - explainability
   - transparency
+  - simulatability
+  - decomposability
+  - algorithmic-transparency
+  - post-hoc-interpretability
+  note: >-
+    Lipton argues that any claim about interpretability should fix a specific
+    definition, and that linear models are not strictly more interpretable than
+    deep neural networks: it depends on which notion is meant (see the useful
+    note on qualifying claims about interpretability).
 - key: model-card
   term: Model Card
   definitions:
@@ -422,6 +490,43 @@ terms:
   - datasheet
   - transparency
   - auditability
+- key: post-hoc-interpretability
+  term: Post-hoc Interpretability
+  alias: post-hoc explanation
+  definitions:
+  - source: lipton-2018
+    at: §3.2
+    quote: true
+    text: >-
+      While post-hoc interpretations often do not elucidate precisely how a model
+      works, they may nonetheless confer useful information for practitioners
+      and end users of machine learning.
+  - source: lipton-2018
+    at: §3.2
+    text: >-
+      Common approaches are text explanations, visualisations of learned representations
+      or models, local explanations such as saliency maps, and explanation by
+      example. They can interpret opaque models after the fact without sacrificing
+      predictive performance.
+  - source: barredo-2020
+    text: >-
+      Techniques that explain models not readily interpretable by design, including
+      text explanations, visual explanations, local explanations, explanations
+      by example, explanations by simplification, and feature relevance explanations.
+  - source: ribeiro-2016
+    text: >-
+      One example is LIME, which explains an individual prediction of any classifier
+      by learning a simple, interpretable model that approximates the classifier
+      locally around that prediction.
+  note: >-
+    Lipton cautions that post-hoc interpretations can mislead: optimised to satisfy
+    subjective demands, an algorithm may, deliberately or not, present misleading
+    but plausible explanations. Local explanations such as saliency maps can also
+    change completely when a single input pixel moves.
+  related:
+  - explainability
+  - interpretability
+  - transparency
 - key: privacy
   term: Privacy
   alias: privacy-enhanced AI
@@ -745,6 +850,37 @@ terms:
   - adversarial-example
   - data-poisoning
   - prompt-injection
+- key: simulatability
+  term: Simulatability
+  definitions:
+  - source: lipton-2018
+    at: §3.1.1
+    quote: true
+    text: >-
+      In the strictest sense, we might call a model transparent if a person can
+      contemplate the entire model at once.
+  - source: lipton-2018
+    at: §3.1.1
+    text: >-
+      Lipton elaborates that a person should be able to take the input data and
+      the model’s parameters and, in reasonable time, step through every calculation
+      needed to produce a prediction. Simulatability may have two subtypes, based
+      on the total size of the model and on the computation needed for inference.
+  - source: barredo-2020
+    text: >-
+      The first level of transparency in a taxonomy of transparent models: the
+      ability of a model to be simulated, or thought about, strictly by a human.
+      Its complexity is therefore central.
+  note: >-
+    Because “reasonable time” is subjective and human capacity is limited, Lipton
+    concludes that neither linear models, rule-based systems, nor decision trees
+    are intrinsically interpretable: high-dimensional linear models or deep trees
+    can be less simulatable than a compact neural network.
+  related:
+  - decomposability
+  - algorithmic-transparency
+  - transparency
+  - interpretability
 - key: system-of-systems
   term: System of Systems
   alias: SoS
@@ -799,17 +935,61 @@ terms:
       Transparency obligations toward the people affected: for example, disclosing
       that they are interacting with an AI system, and marking synthetic or deep-fake
       content.
+  - source: lipton-2018
+    at: §3.1
+    quote: true
+    text: >-
+      Informally, transparency is the opposite of opacity or blackbox-ness. It
+      connotes some sense of understanding the mechanism by which the model works.
   related:
   - explainability
   - accountability
   - model-card
+  - simulatability
+  - decomposability
+  - algorithmic-transparency
   note: >-
     NIST adds that meaningful transparency provides access to appropriate levels
     of information, based on the stage of the AI lifecycle and tailored to the
     role or knowledge of the AI actors or individuals using the system, and that
     by promoting higher levels of understanding, transparency increases confidence
     in the AI system. See the useful note on how transparency, explainability,
-    and interpretability relate.
+    and interpretability relate. Lipton’s sense is about the model itself, at
+    three levels: the entire model (simulatability), its individual components
+    (decomposability), and the training algorithm (algorithmic transparency).
+    It differs from NIST’s sense, which is about information being available to
+    people (see the useful note on two meanings of transparency).
+- key: trust
+  term: Trust
+  definitions:
+  - source: lipton-2018
+    at: §2.1
+    text: >-
+      A term with several senses when used to motivate interpretability: confidence
+      that a model will perform well; a subjective sense of ease with a well-understood
+      model; confidence that it will perform well on the real objectives when
+      these differ from the training objectives; or comfort in relinquishing control
+      to it, which depends on which examples it gets right, not only how often.
+  - source: mayer-1995
+    text: >-
+      The willingness of a party to be vulnerable to the actions of another, based
+      on the expectation that the other will perform an action important to the
+      trustor, irrespective of the ability to monitor or control it.
+  - source: lee-see-2004
+    text: >-
+      Trust in automation: the attitude that an agent will help achieve an individual’s
+      goals in a situation characterised by uncertainty and vulnerability. Trust
+      should be *calibrated*, matching the automation’s actual capabilities, to
+      avoid both misuse and disuse.
+  note: >-
+    Trust is an attitude held by people; trustworthiness is a property of the
+    system that justifies it. Trustworthy AI frameworks aim at the second, so
+    that people’s trust is well calibrated.
+  related:
+  - trustworthy-ai
+  - interpretability
+  - human-oversight
+  - reliability
 - key: trustworthy-ai
   term: Trustworthy AI
   definitions:
@@ -853,6 +1033,7 @@ terms:
   - transparency
   - validity
   - reliability
+  - trust
 - key: validation
   term: Validation
   definitions:

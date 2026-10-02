@@ -4,16 +4,20 @@
 # source, the text (blank lines separate paragraphs), and related term keys.
 notes:
 - key: transparency-explainability-interpretability
-  subject: Relationship between Transparency, Explainability, and Interpretability
+  subject: >-
+    Relationship between Transparency, Explainability, and Interpretability
   source: nist-ai-rmf
   at: §3.5
   quote: true
   text: >-
-    Transparency can answer the question of “what happened” in the system.
-    Explainability can answer the question of “how” a decision was made in the
-    system. Interpretability can answer the question of “why” a decision was
-    made by the system and its meaning or context to the user.
-  related: [transparency, explainability, interpretability]
+    Transparency can answer the question of “what happened” in the system. Explainability
+    can answer the question of “how” a decision was made in the system. Interpretability
+    can answer the question of “why” a decision was made by the system and its
+    meaning or context to the user.
+  related:
+  - transparency
+  - explainability
+  - interpretability
 - key: fairness-without-harmful-bias
   subject: Fairness in the Absence of Harmful Bias
   source: nist-ai-rmf
@@ -23,4 +27,37 @@ notes:
     Systems in which harmful biases are mitigated are not necessarily fair. For example, systems in which predictions are somewhat balanced across demographic groups may still be inaccessible to individuals with disabilities or affected by the digital divide or may exacerbate existing disparities or systemic biases.
 
     Bias is broader than demographic balance and data representativeness. NIST has identified three major categories of AI bias to be considered and managed: systemic, computational and statistical, and human-cognitive. Each of these can occur in the absence of prejudice, partiality, or discriminatory intent.
-  related: [fairness, bias]
+  related:
+  - fairness
+  - bias
+- key: two-meanings-of-transparency
+  subject: Two Meanings of Transparency
+  source: lipton-2018
+  at: §3.1
+  text: >-
+    Transparency is used in two different senses. In machine learning research,
+    following Lipton, it means understanding the mechanism by which a model works,
+    at the level of the whole model (simulatability), its components (decomposability),
+    or its training algorithm (algorithmic transparency). In governance frameworks
+    such as the NIST AI RMF and the EU AI Act, it means that information about
+    an AI system and its outputs is available to the people who interact with
+    it. A system can be transparent in the second sense, with full documentation
+    and disclosure, while its model is opaque in the first.
+  related:
+  - transparency
+  - simulatability
+  - decomposability
+  - algorithmic-transparency
+- key: qualify-interpretability-claims
+  subject: Claims About Interpretability Must Be Qualified
+  source: lipton-2018
+  at: §4
+  text: |-
+    Interpretability does not refer to a single concept, so any claim about it should fix a specific definition. A form of transparency can be shown directly; for post-hoc interpretability, a paper should state a clear objective and show evidence that the explanation achieves it.
+
+    Linear models are not strictly more interpretable than deep neural networks. They have algorithmic transparency, but lose simulatability when high-dimensional and decomposability when built on heavily engineered features, while deep networks learn representations that support post-hoc interpretation. Transparency may also be at odds with the broader goals of AI: giving up predictive power for it should be justified, not a concession to institutional bias against new methods.
+  related:
+  - interpretability
+  - post-hoc-interpretability
+  - simulatability
+  - decomposability

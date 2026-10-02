@@ -249,6 +249,14 @@ terms:
     text: >-
       The ability of a machine learning model to make predictions that are as
       accurate on new data as on training data.
+  - source: lipton-2018
+    at: §2.3
+    text: >-
+      Termed *transferability*: the richer capacity, which humans have, to transfer
+      learned skills to unfamiliar situations. It goes beyond the gap between
+      training and test error on data from the same distribution, and matters
+      when the environment is non-stationary, when the model’s use alters the
+      environment, or when the environment is adversarial.
   note: >-
     Classical generalisation assumes that test data come from the same distribution
     as training data. Generalisation under distribution shift is a harder, separate
