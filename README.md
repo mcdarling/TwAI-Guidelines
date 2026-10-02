@@ -23,6 +23,8 @@ The dictionary is published in two forms, both generated from the same data:
 | `dictionary/ai.yaml` | General AI terms (**source of truth**) |
 | `dictionary/ml.yaml` | Machine learning terms (**source of truth**) |
 | `dictionary/trustworthy.yaml` | Trustworthy AI terms (**source of truth**) |
+| `dictionary/notes.yaml` | Useful Notes: guidance that spans several terms |
+| `dictionary/acronyms.yaml` | Acronyms that are not already a term's alias |
 | `references.bib` | Every cited source |
 | `tools/build.py` | Checks the data and generates the LaTeX and site pages |
 | `twai-dictionary.tex`, `twaidict.sty` | PDF layout |
@@ -42,9 +44,34 @@ make site       # website only, in docs/_build/html
 make distclean  # remove all build output
 ```
 
-On every pull request, GitHub Actions builds both forms. On `main`, it also
-publishes the site to GitHub Pages. To enable publishing, set
-**Settings → Pages → Build and deployment → Source** to **GitHub Actions**.
+### Hosting on GitHub and GitLab
+
+The same repository builds and publishes on both hosts with no changes:
+
+| | GitHub | GitLab |
+| --- | --- | --- |
+| CI file | `.github/workflows/build.yml` | `.gitlab-ci.yml` |
+| Pull or merge requests | Build the PDF and site | Build the PDF and site |
+| Default branch | Also publishes to GitHub Pages | Also publishes to GitLab Pages |
+| One-time setup | **Settings → Pages → Source**: *GitHub Actions* | GitLab Pages enabled for the instance |
+
+Each host ignores the other's CI file. The site's "view" and "edit" links
+point at whichever host built it, and pages generated from the YAML link to
+the YAML file itself.
+
+To work on GitHub and publish internally, add the GitLab repository as a
+second remote once, then push to it whenever you want to update the internal
+site:
+
+```sh
+git remote add internal https://gitlab.example.org/group/twai-guidelines.git
+git pull origin main          # get the latest from GitHub
+git push internal main        # GitLab builds and publishes it
+```
+
+If the internal network cannot reach Docker Hub or PyPI, set the GitLab CI/CD
+variables `TEX_IMAGE` (a TeX Live image with `latexmk` and `biber`) and
+`PIP_INDEX_URL` (a Python package index) to internal mirrors.
 
 ### Adding or editing a term
 
@@ -75,6 +102,17 @@ Edit the domain's YAML file, keeping terms in alphabetical order:
 - `tools/build.py` fails the build if terms are out of order, a key is
   duplicated, a source or related term does not exist, or a term has fewer
   than two definitions.
+
+### Useful notes and acronyms
+
+Add a note to `dictionary/notes.yaml` with a `subject`, a `source`, an
+optional `at`, `quote: true` if copied exactly, the `text` (a blank line
+separates paragraphs), and `related` term keys. The Acronyms section lists
+every alias that is an acronym, such as LLM, automatically. Add others, or
+override an expansion, in `dictionary/acronyms.yaml`.
+
+Definitions the team has written itself cite the `twai-internal` source,
+which is labelled *TwAI internal*.
 
 ### Accuracy
 

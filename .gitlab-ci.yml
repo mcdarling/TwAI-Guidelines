@@ -1,0 +1,48 @@
+# GitLab CI for the TwAI Dictionary: the counterpart of
+# .github/workflows/build.yml, so the same commits build on either host.
+#
+# Merge requests build the PDF and the site; the default branch also
+# publishes them with GitLab Pages. On a network without Docker Hub or PyPI
+# access, set these CI/CD variables to internal mirrors:
+#   TEX_IMAGE      a TeX Live image with latexmk and biber
+#   PIP_INDEX_URL  a Python package index (pip reads it automatically)
+
+variables:
+  TEX_IMAGE: texlive/texlive:latest
+
+.build:
+  image: $TEX_IMAGE
+  before_script:
+    # The TeX Live image may lack Python's venv module or make; add them if so.
+    - |
+      if ! python3 -m venv .venv 2>/dev/null || ! command -v make >/dev/null; then
+        apt-get update
+        apt-get install -y --no-install-recommends python3 python3-venv make
+        rm -rf .venv && python3 -m venv .venv
+      fi
+    - . .venv/bin/activate
+    - pip install -r requirements.txt
+  script:
+    - make pdf site
+
+build:
+  extends: .build
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  artifacts:
+    paths:
+      - twai-dictionary.pdf
+      - docs/_build/html
+    expire_in: 1 week
+
+pages:
+  extends: .build
+  script:
+    - make pdf site
+    # GitLab Pages serves the job's public/ folder.
+    - mv docs/_build/html public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

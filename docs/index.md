@@ -46,8 +46,10 @@ Transparency, fairness, robustness, accountability, oversight, and risk.
 - A note after the definitions explains how they differ, and **See also**
   links to related terms.
 
-Browse every term on the [A–Z list](generated/a-z.md), or see which
-organisations define which terms on the [coverage table](generated/coverage.md).
+Browse every term on the [A–Z list](generated/a-z.md) or the
+[acronyms](generated/acronyms.md), read [useful notes](generated/notes.md) that
+span several terms, or see which organisations define which terms on the
+[coverage table](generated/coverage.md).
 Use the search box to find a term or phrase.
 
 The whole dictionary is also available as a
@@ -60,6 +62,7 @@ The whole dictionary is also available as a
 generated/ai
 generated/ml
 generated/trustworthy
+generated/notes
 ```
 
 ```{toctree}
@@ -67,6 +70,7 @@ generated/trustworthy
 :caption: Browse
 
 generated/a-z
+generated/acronyms
 generated/coverage
 generated/sources
 ```

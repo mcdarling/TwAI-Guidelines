@@ -9,6 +9,11 @@
   --twai-unesco: #0077a8;
   --twai-coe: #a33a5b;
   --twai-owasp: #6b6b6b;
+  --twai-nasem: #3d5a80;
+  --twai-jcgm: #2f6f6f;
+  --twai-cisa: #8a4b2a;
+  --twai-dod: #4a5a2a;
+  --twai-internal: #5c5c8a;
   --twai-academic: #7b6a48;
 }
 
@@ -74,6 +79,11 @@ span.body-ieee { background: var(--twai-ieee); }
 span.body-unesco { background: var(--twai-unesco); }
 span.body-council-of-europe { background: var(--twai-coe); }
 span.body-owasp { background: var(--twai-owasp); }
+span.body-national-academies { background: var(--twai-nasem); }
+span.body-jcgm { background: var(--twai-jcgm); }
+span.body-cisa { background: var(--twai-cisa); }
+span.body-us-dod { background: var(--twai-dod); }
+span.body-twai-internal { background: var(--twai-internal); }
 
 /* Quoted / adapted marker. */
 span.kind {
@@ -112,4 +122,9 @@ span.chip {
 table.docutils td:not(:first-child),
 table.docutils th:not(:first-child) {
   text-align: center;
+}
+
+/* Useful notes: source label under the note text. */
+.note-source {
+  margin-top: -0.4rem;
 }
