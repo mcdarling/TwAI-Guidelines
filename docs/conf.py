@@ -48,7 +48,7 @@ def setup(app):
 
 project = 'TwAI Dictionary'
 author = 'TwAI Guidelines'
-copyright = '2026, TwAI Guidelines'
+html_show_copyright = False
 
 extensions = ['myst_parser', 'sphinx_design']
 myst_enable_extensions = ['attrs_block', 'attrs_inline', 'colon_fence', 'dollarmath']
